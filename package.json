@@ -1,0 +1,29 @@
+{
+  "name": "medicalcard",
+  "version": "1.0.0",
+  "description": "Дипломный проект",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eugene-Okhryamkin/medicalCard.git"
+  },
+  "author": "Евгений Охрямкин",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Eugene-Okhryamkin/medicalCard/issues"
+  },
+  "homepage": "https://github.com/Eugene-Okhryamkin/medicalCard#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
