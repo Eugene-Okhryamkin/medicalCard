@@ -1,0 +1,35 @@
+/*FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap')   
+
+
+
+/*VARS*/
+$blue: #00c3ff
+$gray: #f5f5f5
+$fontGray: #666666
+
+$OSr: "Open Sans" 
+
+/*MIXINS*/
+
+@mixin font($fontFamily, $fontWeight, $fontSize, $color)
+    color: $color
+    font: 
+        family: $fontFamily
+        weight: $fontWeight
+        size: $fontSize
+
+    
+
+/*DEFAULT*/
+
+input 
+    
+    &:active, &:focus
+        outline: none
+        
+
+button 
+    @extend input        
+    border: none
+    cursor: pointer

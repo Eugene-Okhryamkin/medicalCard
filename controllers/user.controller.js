@@ -57,6 +57,7 @@ exports.devDeleteUser = async (req, res) => {
 }
 
 exports.authUser = (req, res) => {
+    console.log(req.body);
     createAccessToken(User, res);
 };
 
