@@ -1,8 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const config = require("../config/config.json");
 const User = require("../models/user.model.js").User;
 const db = require("../config/database");
-const { createAccessToken, verifyToken } = require("../config/tokens");
 
 exports.addUser = async (req, res) => {
     try {    
@@ -24,10 +24,10 @@ exports.addUser = async (req, res) => {
         await User.create(req.body);
 
         return res.sendStatus(201).json({ message: "Пациент успешно зарегистрирован" });
-        
+
     } catch(err) {
         console.error(err);
-        res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" });
+        return res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" });
     }
 };
 
@@ -56,9 +56,34 @@ exports.devDeleteUser = async (req, res) => {
     }
 }
 
-exports.authUser = (req, res) => {
-    console.log(req.body);
-    createAccessToken(User, res);
+exports.authUser = async (req, res) => {
+    try {
+        
+        const { SNILS, Password } = req.body;
+
+        const user = await User.findOne({
+            where: { SNILS }
+        });
+    
+        if(!user) {
+            return res.status(404).json({ message: "Такого пользователя не существует" });
+        }
+
+        const pass = await bcrypt.compare(Password, user.Password);
+
+        if(!pass) {
+            return res.status(403).json({ message: "Неверный пароль" });
+        }
+
+        const token = jwt.sign({ userID: user.idpacient }, config.jwtSecret, { expiresIn: "1h" });
+        
+        res.json({token,  userID: user.idpacient });
+
+    } catch(err) {
+        res.sendStatus(500).json({ message: "Что-то пошло не так, попробуйте снова" });
+    }
+    
+
 };
 
 

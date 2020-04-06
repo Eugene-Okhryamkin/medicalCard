@@ -1,5 +1,6 @@
 const sendData = async (url, method = "GET", body = null, headers = { "Content-Type": "application/json" }) => {
-    await fetch(url, { method, body: JSON.stringify(body), headers })
+    try {
+        await fetch(url, { method, body: JSON.stringify(body), headers })
         .then(response => {
             if(response.ok) {
                 return response.json();
@@ -13,6 +14,10 @@ const sendData = async (url, method = "GET", body = null, headers = { "Content-T
                 throw error;
             })
         })
+    } catch (err) {
+        console.log(err);
+    }
+    
 };
 
 export default sendData;

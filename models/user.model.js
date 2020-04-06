@@ -133,7 +133,7 @@ User.init({
     freezeTableName: true,
     timestamps: false,
     tableName: 'pacients',
-    modelName: "Pacient"
+    modelName: "User"
 });
 
 User.sync();

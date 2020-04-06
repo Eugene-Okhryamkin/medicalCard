@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import "./Auth.sass";
 import AuthHeader from "../../components/Auth/AuthHeader/AuthHeader.jsx";
 import AuthMain from "../../components/Auth/AuthMain/AuthMain.jsx";
+// import Alert from "../../components/Alert/Alert.jsx";
+
 
 class Auth extends Component {
     render() {
@@ -11,6 +13,7 @@ class Auth extends Component {
                     <AuthHeader />
                     <AuthMain />
                 </div>  
+                {/* <Alert alertMessage="Сообщение" /> */}
             </div>
         )
     }

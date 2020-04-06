@@ -6,12 +6,12 @@ class AuthMain extends Component {
 
     state = {
         SNILS: "",
-        password: "",
+        Password: "",
     }
 
     onBtnSubmit = e => {
         e.preventDefault();
-        sendData("http://localhost:3000/api/users/login", "POST", { ...this.state });
+        sendData("/api/users/login", "POST", { ...this.state });
     }
 
     onHandleChange = e => {
@@ -20,9 +20,9 @@ class AuthMain extends Component {
     }
 
     validate = () => {
-        const { SNILS, password } = this.state;
+        const { SNILS, Password } = this.state;
 
-        if(SNILS.trim() && password) {
+        if(SNILS && Password) {
             return true;
         }
 
@@ -30,7 +30,7 @@ class AuthMain extends Component {
     }
 
     render() {
-        const { SNILS, password } = this.state;
+        const { SNILS, Password } = this.state;
 
         return (
             <div id="auth-card-main">
@@ -44,12 +44,12 @@ class AuthMain extends Component {
                             onChange={this.onHandleChange} 
                             value={SNILS}/>
                         <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
+                            type="Password" 
+                            id="Password" 
+                            name="Password" 
                             placeholder="Пароль" 
                             onChange={this.onHandleChange}
-                            value={password}/>
+                            value={Password}/>
                     </form>
                 </div>
                 <div id="auth-card-main-input_submit">
