@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import Header from "./Header/Header.jsx";
-// import Sidebar from "./Sidebar/Sidebar.jsx";
-// import Workarea from "./Workarea/Workarea.jsx"; 
-import Auth from "../pages/Auth/Auth.jsx";
+import Main from "../pages/Main/Main.jsx";
 import "normalize.css";
 import "./App.sass";
 
@@ -12,11 +10,7 @@ class App extends Component {
         return (
             <>
                 <Header />
-                <div id="main">
-                    <Auth />
-                    {/* <Sidebar />
-                    <Workarea /> */}
-                </div>
+                <Main />
             </>
         )
     }

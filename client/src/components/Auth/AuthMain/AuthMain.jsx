@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import "./AuthMain.sass";
-import sendData from "../../../utils/sendData";
+import { connect } from "react-redux";
+import { handleLogin } from "../../../actions/handleLoginAction";
+import propTypes from "prop-types";
 
 class AuthMain extends Component {
 
     state = {
         SNILS: "",
-        Password: "",
+        Password: ""
     }
 
     onBtnSubmit = e => {
         e.preventDefault();
-        sendData("/api/users/login", "POST", { ...this.state });
+        const { handleLoginAction } = this.props;
+        handleLoginAction(this.state);
     }
 
     onHandleChange = e => {
@@ -63,4 +66,13 @@ class AuthMain extends Component {
     }
 }
 
-export default AuthMain;
+const mapDispatchToProps = dispatch => ({
+    handleLoginAction: user => dispatch(handleLogin(user))
+});
+
+AuthMain.propTypes = {
+    handleLoginAction: propTypes.func.isRequired
+}
+
+export default connect(null, mapDispatchToProps)(AuthMain);
+

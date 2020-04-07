@@ -1,6 +1,14 @@
+@import "../../settings.sass";
+
 .alert
     display: flex 
     width: 410px
     height: 50px
     border-radius: 5px
+    border: 2px solid red
+    background: rgba(255, 64, 64, .5)
+    justify-content: center
     margin-top: 20px 
+
+    p 
+        @include font($OSr, normal, 15px, #000)
