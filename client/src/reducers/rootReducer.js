@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import { handleLoginReducer } from "./handleLoginReducer";
+import { toggleMenu } from "./toggleMenuReducer";
+import { auth } from "./authReducer";
 
 export const rootReducer = combineReducers({
-    getUser: handleLoginReducer
+    toggleMenu: toggleMenu,
+    auth
 });

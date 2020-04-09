@@ -1,14 +1,53 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { logout } from "./../../actions/logoutAction";
+import propTypes from "prop-types";
 import "./Sidebar.sass";
 
-class Sidebar extends Component {
-    render() {
-        return (
-            <div id="sidebar">
 
+class Sidebar extends Component {
+
+    logout = e => {
+        e.preventDefault();
+        localStorage.removeItem("authData");
+        this.props.logoutUser();
+    }
+
+    render() {
+        const { menuState } = this.props;
+        console.log(menuState);
+
+
+        return (
+            <div id="sidebar" style={ !menuState.isHidden ? {  width: "25%" } : {  width: "0%" }}>
+                <nav style={ !menuState.isHidden ? {  opacity: "1" } : { opacity: "0" }}>
+                    <ul>
+                        <li><a href="#">navLink</a></li>
+                        <li><a href="#">navLink</a></li>
+                        <li><a href="#">navLink</a></li>
+                        <li><a href="#">navLink</a></li>
+                        <li><a href="#">navLink</a></li>
+                        <li><a href="#">navLink</a></li>
+                        <li><a href="#" onClick={this.logout}>Выход</a></li>
+                    </ul>
+                </nav>
             </div>
         )
     }
 }
 
-export default Sidebar
+
+const mapStateToProps = state => ({
+    menuState: state.toggleMenu 
+});
+
+const mapDispatchToProps = dispatch => ({
+    logoutUser: () => dispatch(logout())
+});
+
+Sidebar.propTypes = {
+    menuState: propTypes.object.isRequired,
+    logoutUser: propTypes.func.isRequired
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

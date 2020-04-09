@@ -27,7 +27,7 @@ class Auth extends Component {
 }
 
 const mapStateToProps = state => ({
-    error: state.getUser.error
+    error: state.auth.error
 });
 
 Auth.propTypes = {

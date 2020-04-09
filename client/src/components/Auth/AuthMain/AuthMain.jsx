@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./AuthMain.sass";
 import { connect } from "react-redux";
-import { handleLogin } from "../../../actions/handleLoginAction";
+import { login } from "../../../actions/authAction"
 import propTypes from "prop-types";
 
 class AuthMain extends Component {
@@ -13,8 +13,8 @@ class AuthMain extends Component {
 
     onBtnSubmit = e => {
         e.preventDefault();
-        const { handleLoginAction } = this.props;
-        handleLoginAction(this.state);
+        const { login } = this.props;
+        login(this.state);
     }
 
     onHandleChange = e => {
@@ -67,11 +67,11 @@ class AuthMain extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    handleLoginAction: user => dispatch(handleLogin(user))
+    login: userData => dispatch(login(userData))
 });
 
 AuthMain.propTypes = {
-    handleLoginAction: propTypes.func.isRequired
+    login: propTypes.func
 }
 
 export default connect(null, mapDispatchToProps)(AuthMain);

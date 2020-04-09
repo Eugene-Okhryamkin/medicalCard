@@ -2,8 +2,27 @@
 
 #header
     display: flex
+    position: relative
     background: $blue
     width: 100%
     height: 55px
-    position: absolute
-    top: 0
+    justify-content: center
+
+#header-container
+    display: flex 
+    justify-content: space-between
+    align-items: center
+    width: 80%    
+
+#menu-btn
+    display: flex 
+    cursor: pointer
+    left: 40px
+    z-index: 99999
+
+    .fa-bars
+        color: #fff 
+        font-size: 25px
+
+#top-username
+    @include font($OSr, normal, 16px, #fff)        
