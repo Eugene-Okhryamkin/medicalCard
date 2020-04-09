@@ -56,6 +56,7 @@ exports.devDeleteUser = async (req, res) => {
     }
 }
 
+
 exports.authUser = async (req, res) => {
     try {
         
@@ -75,9 +76,16 @@ exports.authUser = async (req, res) => {
             return res.status(403).json({ message: "Неверный пароль" });
         }
 
-        const token = jwt.sign({ userID: user.idpacient }, config.jwtSecret, { expiresIn: "1h" });
+        const payload = {
+            id: user.idpacient,
+            name: user.Name,
+            middlename: user.MiddleName,
+            surname: user.Surname
+        }
+
+        const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
         
-        res.json({token, user });
+        res.json({ token });
 
     } catch(err) {
         res.sendStatus(500).json({ message: "Что-то пошло не так, попробуйте снова" });
