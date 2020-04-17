@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const config = require("../config/config.json");
 const User = require("../models/user.model.js").User;
 const db = require("../config/database");
+const rules = require("../config/rules");
 
 exports.addUser = async (req, res) => {
     try {    
@@ -39,7 +40,7 @@ exports.getUsers = async (req, res) => {
 
     } catch(err) {
         console.error("ERROR: ", err);
-        res.sendStatus(404).json({ message: "Не найдено" })
+        res.send(404).json({ message: "Не найдено" })
     }    
 };
 
@@ -47,12 +48,13 @@ exports.devDeleteUser = async (req, res) => {
     try {
         await User.destroy({
             where: {
-                Name: ""
+                idpacient: req.body.id
             }
         });
-        res.send("Удалено");
+        res.json({ message: "Удалено" })
     } catch (err) {
         console.error("ERROR :", err);
+        res.send(500).json({ message: "Что-то пошло не так, попробуйте снова" })
     }
 }
 
@@ -76,23 +78,44 @@ exports.authUser = async (req, res) => {
             return res.status(403).json({ message: "Неверный пароль" });
         }
 
+        const userRules = rules(user); 
+
         const payload = {
             id: user.idpacient,
             name: user.Name,
             middlename: user.MiddleName,
-            surname: user.Surname
+            surname: user.Surname,
+            role: user.Role,
+            rules: userRules
         }
+        
 
         const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
         
         res.json({ token });
 
     } catch(err) {
-        res.sendStatus(500).json({ message: "Что-то пошло не так, попробуйте снова" });
+        res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" });
     }
     
 
 };
 
+
+exports.updateUserData = async (req, res) => {
+    console.log(req.body);
+    try {
+        await User.update(req.body, {
+            where: {
+                idpacient: req.body.id
+            }
+        })
+
+        res.status(200).json({ message: "Обновлено" })
+        
+    } catch(err) {
+        res.status(500).json({ message: "Что-то пошло не так, попробуйте снова" });
+    }
+}
 
 

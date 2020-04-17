@@ -127,6 +127,22 @@ User.init({
     Password: {
         type: DataTypes.STRING,
         allowNull: false
+    },
+    Role: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    Gender: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    RightToPreferentialService: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    Disability: {
+        type: DataTypes.STRING,
+        allowNull: false
     }
 }, {
     sequelize: db,

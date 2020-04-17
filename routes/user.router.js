@@ -6,6 +6,7 @@ userRouter.post("/add", userController.addUser);
 userRouter.post("/login", userController.authUser);
 userRouter.get("/get", userController.getUsers);
 userRouter.post("/delete", userController.devDeleteUser);
+userRouter.post("/update", userController.updateUserData);
 
 module.exports = userRouter;
 

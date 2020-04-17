@@ -57,6 +57,7 @@ class AuthMain extends Component {
                 </div>
                 <div id="auth-card-main-input_submit">
                     <button
+                        id="auth-btn"
                         onClick={this.onBtnSubmit}
                         disabled={!this.validate()}
                     >войти</button>

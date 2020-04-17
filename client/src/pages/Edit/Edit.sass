@@ -1,0 +1,74 @@
+@import "../../settings.sass"
+
+#edit
+    display: flex
+    position: absolute
+    background: #fff
+    justify-content: center
+    overflow-y: scroll
+    flex-wrap: wrap
+    align-items: center
+    width: 100%
+    height: 100%
+    top: 0
+
+    &::-webkit-scrollbar
+        width: 9px
+        background: #fff
+        height: 9px
+
+    &::-webkit-scrollbar-thumb
+         background: $blue
+
+    #close
+        position: absolute
+        right: 0
+        top: 0  
+
+        .fa-times-circle
+            cursor: pointer
+            font-size: 30px
+            color: $fontGray 
+
+    input[type="text"] 
+        width: 40%
+
+
+    #edit-main
+        display: flex 
+        flex-direction: column 
+        justify-content: center 
+        padding:
+            top: 20px
+            bottom: 20px
+        width: 90%
+        top: 0
+
+        #specData-inputs
+            display: flex
+            flex-direction: column
+            margin-top: 20px
+    
+    
+        
+        .radioInputs
+            display: flex   
+            margin-top: 10px 
+
+        label 
+            display: flex
+            text-align: center
+            margin-left: 20px 
+            @include font($OSr, normal, 14px, #000)
+
+        input[type="radio"]
+            cursor: pointer
+            margin-left: 10px
+            margin-top: 4px    
+
+    #submit 
+        margin-top: 10px 
+
+        #submit-btn
+            padding: 15px 30px 15px 30px
+            color: #fff        

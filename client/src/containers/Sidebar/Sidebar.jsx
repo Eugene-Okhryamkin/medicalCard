@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "./../../actions/logoutAction";
 import propTypes from "prop-types";
@@ -15,15 +16,14 @@ class Sidebar extends Component {
 
     render() {
         const { menuState } = this.props;
-        console.log(menuState);
 
 
         return (
             <div id="sidebar" style={ !menuState.isHidden ? {  width: "25%" } : {  width: "0%" }}>
                 <nav style={ !menuState.isHidden ? {  opacity: "1" } : { opacity: "0" }}>
                     <ul>
-                        <li><a href="#">navLink</a></li>
-                        <li><a href="#">navLink</a></li>
+                        <li><NavLink to={"/"}>Главная страница</NavLink></li>
+                        <li><NavLink to={"/pacients"}>Пациенты</NavLink></li>
                         <li><a href="#">navLink</a></li>
                         <li><a href="#">navLink</a></li>
                         <li><a href="#">navLink</a></li>

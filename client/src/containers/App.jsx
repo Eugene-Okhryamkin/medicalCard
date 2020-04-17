@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Auth from "../pages/Auth/Auth.jsx";
 import Main from "../pages/Main/Main.jsx"
 import { Switch, Route, Redirect } from "react-router-dom";
+import Header from "../containers/Header/Header.jsx";
+import Sidebar from "../containers/Sidebar/Sidebar.jsx"
+import Pacients from "./../pages/Pacients/Pacients.jsx";
 import jwtDecode from "jwt-decode";
 import { connect } from "react-redux";
 import { setUser } from "../actions/setUserAction";
@@ -27,10 +30,17 @@ class App extends Component {
         console.log(isAuthenticated);
         if(isAuthenticated) {
             return (
-                <Switch>
-                    <Route exact path="/" component={ Main } />
-                    <Redirect to="/" />
-                </Switch>
+                <>
+                    <Header />
+                    <Sidebar />
+                    <div id="main-container">
+                        <Switch>
+                            <Route exact path="/" component={ Main } />
+                            <Route exact path={"/pacients"} component={ Pacients } />
+                            <Redirect to="/" />
+                        </Switch>
+                    </div>
+                </>
             )
         } else {
             return (
