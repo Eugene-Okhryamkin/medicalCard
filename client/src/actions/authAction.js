@@ -19,11 +19,12 @@ export const login = userData => dispatch => {
     })
         .then(res => res.json())
         .then(data => {
-            if(data.message) {
+            if(data.error) {
                 localStorage.removeItem("authData");
+                localStorage.clear();
                 dispatch({
                     type: LOGIN_FAIL,
-                    payload: data.message
+                    payload: data.error
                 })
             } else {
                 localStorage.setItem("authData", data.token)

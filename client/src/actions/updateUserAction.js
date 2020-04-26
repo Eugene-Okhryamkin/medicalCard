@@ -1,5 +1,6 @@
 export const UPDATE_USER_REQUEST = "UPDATE_USER_REQUEST";
 export const UPDATE_USER_SUCCESSFUL = "UPDATE_USER_SUCCESSFUL";
+export const UPDATE_USER_FAIL = "UPDATE_USER_FAIL";
 
 export const updateUser = userObj => dispatch => {
     dispatch({
@@ -17,6 +18,13 @@ export const updateUser = userObj => dispatch => {
     })
         .then(res => res.json())
         .then(data => {
+            if(data.error) {
+                dispatch({
+                    type: UPDATE_USER_FAIL,
+                    payload: data.error
+                })
+            }
+
             dispatch({
                 type: UPDATE_USER_SUCCESSFUL,
                 payload: data

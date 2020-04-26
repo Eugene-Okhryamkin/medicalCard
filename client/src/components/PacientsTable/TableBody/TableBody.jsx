@@ -51,7 +51,6 @@ class TableBody extends Component {
                         Dependant={item.Dependant}
                         Passport={item.Passport} 
                         Role={item.Role} />
-
                 )
 
             });

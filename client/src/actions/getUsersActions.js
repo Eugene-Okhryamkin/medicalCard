@@ -17,10 +17,10 @@ export const getUsers = url => dispatch => {
     })
         .then(res => res.json())
         .then(data => {
-            if(data.message) {
+            if(data.error) {
                 dispatch({
                     type: GET_USERS_FAIL,
-                    payload: data.message
+                    payload: data.error
                 })
             } else {
                 dispatch({

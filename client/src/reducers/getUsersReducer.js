@@ -14,7 +14,7 @@ export const getUsers = (state = initState, action) => {
             return { ...state, users: action.payload, isFetching: true, error: "" }
         
         case GET_USERS_FAIL:
-            return { ...state, users: null, isFetching: false, error: action.payload }
+            return { ...state, users: [], isFetching: false, error: action.payload }
          
         case GET_USERS_SUCCESSFUL: 
             return { ...state, users: action.payload, isFetching: false,  error: "" } 

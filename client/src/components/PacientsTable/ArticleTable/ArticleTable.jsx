@@ -20,13 +20,18 @@ class ArticleTable extends Component {
     }
 
     render() {
-        
+        const { userRole } = this.props;
+
         return (
             <tr>
-                <td>
-                    <button onClick={this.onHandleManage}>редактировать</button>
-                    <button onClick={this.onHandleDelete}>удалить</button>
-                </td>
+                {
+                    userRole == "Doctor" ? null :
+                    <td>
+                        <button onClick={this.onHandleManage}>редактировать</button>
+                        <button onClick={this.onHandleDelete}>удалить</button>
+                    </td>
+                }
+                
                 <td>{ this.props.OMC }</td>
                 <td>{ this.props.CodeOfExemption }</td>
                 <td>{ this.props.SNILS }</td>
@@ -96,12 +101,17 @@ ArticleTable.propTypes = {
     Dependant: propTypes.string,
     Passport: propTypes.string,
     deleteUser: propTypes.func,
-    selectUser: propTypes.func
+    selectUser: propTypes.func,
+    userRole: propTypes.string
 }
+
+const mapStateToProps = state => ({
+    userRole: state.auth.user.role 
+})
 
 const mapDispatchToProps = dispatch => ({
     deleteUser: userID => dispatch(deleteUser(userID)),
     selectUser: user => dispatch(selectUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(ArticleTable);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleTable);

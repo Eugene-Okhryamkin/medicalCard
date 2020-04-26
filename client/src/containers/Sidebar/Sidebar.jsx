@@ -19,11 +19,14 @@ class Sidebar extends Component {
 
 
         return (
-            <div id="sidebar" style={ !menuState.isHidden ? {  width: "25%" } : {  width: "0%" }}>
-                <nav style={ !menuState.isHidden ? {  opacity: "1" } : { opacity: "0" }}>
+            <div id="sidebar" style={!menuState.isHidden ? { width: "25%" } : { width: "0%" }}>
+                <nav style={!menuState.isHidden ? { opacity: "1" } : { opacity: "0" }}>
                     <ul>
                         <li><NavLink to={"/"}>Главная страница</NavLink></li>
+
                         <li><NavLink to={"/pacients"}>Пациенты</NavLink></li>
+
+
                         <li><a href="#">navLink</a></li>
                         <li><a href="#">navLink</a></li>
                         <li><a href="#">navLink</a></li>
@@ -38,7 +41,7 @@ class Sidebar extends Component {
 
 
 const mapStateToProps = state => ({
-    menuState: state.toggleMenu 
+    menuState: state.toggleMenu
 });
 
 const mapDispatchToProps = dispatch => ({

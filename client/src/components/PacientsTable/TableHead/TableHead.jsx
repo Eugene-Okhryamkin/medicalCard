@@ -1,10 +1,11 @@
 import React from "react";
+import propTypes from "prop-types";
 import "./TableHead.sass";
 
-export const TableHead = () => (
+export const TableHead = props => (
     <thead>
         <tr>
-            <th>Управление</th>
+            { props.role == "Doctor" ? null : <th>Управление</th>}
             <th>OMC</th>
             <th>Код льготы</th>
             <th>СНИЛС</th>
@@ -38,3 +39,7 @@ export const TableHead = () => (
         </tr>
     </thead>
 )
+
+TableHead.propTypes = {
+    role: propTypes.string
+}
