@@ -17,24 +17,23 @@ class Sidebar extends Component {
     render() {
         const { menuState } = this.props;
 
-
         return (
-            <div id="sidebar" style={!menuState.isHidden ? { width: "25%" } : { width: "0%" }}>
-                <nav style={!menuState.isHidden ? { opacity: "1" } : { opacity: "0" }}>
+            <aside className={!menuState.isHidden ? "sidebar_active" : "sidebar"} >
+                <a href="#" id="menu-btn"></a>
+                <nav id="menu-list">
                     <ul>
-                        <li><NavLink to={"/"}>Главная страница</NavLink></li>
-
-                        <li><NavLink to={"/pacients"}>Пациенты</NavLink></li>
-
-
-                        <li><a href="#">navLink</a></li>
-                        <li><a href="#">navLink</a></li>
-                        <li><a href="#">navLink</a></li>
-                        <li><a href="#">navLink</a></li>
-                        <li><a href="#" onClick={this.logout}>Выход</a></li>
+                        <li>
+                            <NavLink to={"/"} className="ListItem" >Главная страница</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/pacients"} className="ListItem" >Пациенты</NavLink>
+                        </li>
+                        <li>
+                            <a href="#" onClick={this.logout} className="ListItem" >Выход</a>
+                        </li>
                     </ul>
                 </nav>
-            </div>
+            </aside>
         )
     }
 }

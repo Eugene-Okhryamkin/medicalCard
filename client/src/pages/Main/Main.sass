@@ -4,7 +4,30 @@ body
     background: $gray
     overflow: hidden
 
-
 #main
     display: flex
-    width: 100%        
+    position: relative 
+    flex-direction: column
+    width: 100%   
+    z-index: 0
+    align-items: center
+    height: 100vh   
+    transition: .5s
+
+    #main-container
+        display: flex
+        flex-direction: column 
+        width: 90%
+        height: 85vh
+        margin-top: 20px
+        
+
+#main_active
+    @extend #main
+    transform: translateX(25%)
+
+    
+        
+    
+
+ 

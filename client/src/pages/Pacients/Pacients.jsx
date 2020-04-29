@@ -37,7 +37,7 @@ class Pacients extends Component {
             return <Alert alertMessage={ error } success={ false } />
         } else {
             return (
-                <div id="pacients">
+                <section id="pacients">
                     <Search />
                     <div id="pacients-table">
                         <table>
@@ -50,7 +50,7 @@ class Pacients extends Component {
                     <div id="add-btn-wrap"> 
                         <button id="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
                     </div>
-                </div>
+                </section>
             )
         }
     }

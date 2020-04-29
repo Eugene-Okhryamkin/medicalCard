@@ -1,0 +1,52 @@
+@import "../../settings.sass"
+
+
+.Article
+    display: flex 
+    flex-direction: column
+    width: 80%
+    background: #fff
+    cursor: pointer
+    box-shadow: 0 0px rgba(0, 0, 0, 0.21), 0 3px 3px rgba(0, 0, 0, 0.22)
+    justify-content: center
+    align-items: center
+    
+
+    .Article-container
+        display: flex
+        width: 95%
+        align-items: center
+        align-content: center
+
+    .ArticleName
+        display: flex 
+        width: 100%
+        justify-content: flex-start
+
+        p 
+            @include font($OSr, normal ,14px, $fontGray)
+
+    .ArticleState
+        display: flex
+        justify-content: flex-end        
+        transition: .3s ease
+
+        .fa-angle-down
+            color: $fontGray
+
+.Article-content-wrap
+    width: 100%
+    background: #fff
+    box-shadow: 0 0px rgba(0, 0, 0, 0.21), 0 0px 0px rgba(0, 0, 0, 0.22)
+    transition: .3s 
+    justify-content: center
+
+    .Article-content
+        display: flex
+        flex-direction: column
+        transition: .3s ease
+        width: 95%
+        margin: 
+            top: 10px
+            bottom: 10px
+                

@@ -1,44 +1,50 @@
 @import "../../settings.sass";
-    
-#sidebar
-    display: flex
-    opacity: 1
-    background: #fff
-    box-shadow: 0 0 10px rgba(0,0,0,0.5)
-    transition: .5s ease
+
+.sidebar 
+    display: flex 
+    width: 25%
     height: 100vh
-    z-index: 9999
-    position: absolute
+    position: fixed
     left: 0
     top: 0
-    
+    background: #fff 
+    transition: .5s
+    z-index: 99
+    transform: translateX(-100%)
 
-    nav 
-        display: flex 
+
+.sidebar_active
+    @extend .sidebar
+    transform: translateX(0)
+
+#menu-list
+    display: flex   
+    width: 100%
+
+    ul 
+        display: flex
+        flex-direction: column
+        padding: 0
         width: 100%
-        transition: .3s
-        margin-top: 55px
+        list-style-type: none 
+        margin: 0
+        z-index: 000
 
-        ul
-            padding: 0
-            margin: 0
-            list-style-type: none 
+        li 
             width: 100%
+            border-bottom: 1px solid $border
 
-            li 
-                border-bottom: 1px solid $border
+        .ListItem
+            display: flex
+            text-decoration: none
+            padding: 
+                left: 10px
+                top: 10px 
+                bottom: 10px
+                margin: 0
+            @include font($OSr, normal ,16px, #000)
 
-                &:first-child
-                    border-top: 1px solid $border
-
-                a 
-                    display: flex
-                    transition: .2s
-                    margin: 0
-                    padding: 10px
-                    text-decoration: none
-                    @include font($OSr, normal, 16px, $fontGray)
-
-                    &:hover 
-                        background: $blue 
-                        color: #fff
+            &:hover 
+                background: $border
+                color: #fff
+                

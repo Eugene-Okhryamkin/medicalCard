@@ -43,7 +43,7 @@ class Edit extends Component {
         const { updatedUserMessage, updatedUserError } = this.props;
 
         return (
-            <div id="edit">
+            <section id="edit">
                 <div id="edit-main">
                     <div id="mainData-inputs">
                         <input type="text" onChange={this.onHandleEdit} value={this.state.OMC || ""} placeholder="OMC" name="OMC" required />
@@ -121,7 +121,7 @@ class Edit extends Component {
                 <div id="close" >
                     <FontAwesomeIcon onClick={this.handleUnmount} icon={faTimesCircle} />
                 </div>
-            </div>
+            </section>
         )
     }
 }

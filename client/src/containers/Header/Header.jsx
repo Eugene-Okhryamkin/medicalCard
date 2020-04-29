@@ -16,26 +16,31 @@ class Header extends Component {
     }
 
     render() {
-        const { menuState, userName } = this.props;
+        const { username, menuState } = this.props;
 
-        return (
-            <div id="header">
-                <div id="header-container">
-                    <div id="menu-btn" onClick={this.toggle}>
-                        <FontAwesomeIcon icon={faBars} style={!menuState.isHidden ? { color: "#00c3ff" } : { color: "#fff" }} />
+        if(username != null) {
+            return (
+                <header id={!menuState.isHidden ? "header_active" : "header"} >
+                    <div id="header-container">
+                        <div id="menu-btn" onClick={ this.toggle }>
+                            <FontAwesomeIcon icon={ faBars } />
+                        </div>
+                        <div id="top-username">
+                            <p>{ username.surname } { username.name }</p>
+                        </div>
                     </div>
-                    <div id="top-username">
-                        <p>{userName.surname} {userName.name}</p>
-                    </div>
-                </div>
-
-            </div>
-        )
+                </header>
+            )
+        } else {
+            return (
+                <p>Загрузка</p>
+            )
+        }
     }
 }
 
 const mapStateToProps = state => ({
-    userName: state.auth.user,
+    username: state.auth.user,
     menuState: state.toggleMenu
 });
 
@@ -46,7 +51,7 @@ const mapDispatchToProps = dispatch => ({
 Header.propTypes = {
     menuState: propTypes.object,
     toggle: propTypes.func,
-    userName: propTypes.object
+    username: propTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
