@@ -38,7 +38,7 @@ class AuthMain extends Component {
         return (
             <div id="auth-card-main">
                 <div id="auth-inputs">
-                    <form action="POST">
+                    <form action="POST" id="authForm">
                         <input 
                             type="text" 
                             id="SNILS" 

@@ -1,0 +1,25 @@
+@import "../../../settings.sass"
+
+td
+    height: 100%
+    width: 100% 
+    text-align: center 
+    @include font($OSr, normal, 14px, #000)
+     
+
+    &:nth-child(2)
+        padding-left: 10px
+                
+
+    &:nth-child(3)
+        flex-basis: 20%
+                
+                                
+
+tr 
+    &:nth-child(odd) 
+        background: white
+            
+    &:nth-child(even) 
+        background: $gray
+        

@@ -33,7 +33,7 @@ class Header extends Component {
             )
         } else {
             return (
-                <p>Загрузка</p>
+                null
             )
         }
     }

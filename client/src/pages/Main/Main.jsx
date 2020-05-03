@@ -4,8 +4,8 @@ import { setUser } from "../../actions/setUserAction";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Auth from "../Auth/Auth.jsx";
 import Home from "../Home/Home.jsx";
-// import Header from "../../containers/Header/Header.jsx";
 import Pacients from "../Pacients/Pacients.jsx";
+import Epicrisis from "../Epicrisis/Epicrisis.jsx";
 import jwtDecode from "jwt-decode";
 import propTypes from "prop-types";
 
@@ -33,6 +33,7 @@ class Main extends Component {
                         <Switch>
                             <Route exact path="/" component={ Home } />
                             <Route exact path={"/pacients"} component={ Pacients } />
+                            <Route exact path={"/epicrisis"} component={ Epicrisis } />
                             <Redirect to="/" />
                         </Switch>
                     </div>

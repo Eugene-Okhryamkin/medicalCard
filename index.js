@@ -16,12 +16,15 @@ const app = express();
 //Роуты(Маршруты)
 const homeRouter = require("./routes/home.router");
 const userRouter = require("./routes/user.router");
+const epicrisisRouter = require("./routes/epicrisis.router");
+
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/api/users", userRouter);
+app.use("/api/epicrisis", epicrisisRouter);
 app.use("/", homeRouter);
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));

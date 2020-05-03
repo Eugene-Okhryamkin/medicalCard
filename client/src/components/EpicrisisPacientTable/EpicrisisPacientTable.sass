@@ -1,0 +1,31 @@
+@import "../../settings.sass"
+@import "../../pages/Pacients/Pacients.sass"
+@import "../PacientsTable/TableBody/TableBody.sass"
+
+.epicrisis-table-upload
+    display: flex
+    height: 50vh        
+    overflow-y: scroll
+    justify-content: center
+
+    @media screen and (max-width: 800px)
+        justify-content: unset
+
+
+
+.epicrisis-table
+    display: table
+    width: 100%
+    table-layout: fixed
+
+    @media screen and(max-width: 800px)
+        overflow-x: scroll
+
+    @media screen and(max-width: 600px)
+        table-layout: auto
+
+    td 
+        width: 100%
+
+        input 
+            margin: auto

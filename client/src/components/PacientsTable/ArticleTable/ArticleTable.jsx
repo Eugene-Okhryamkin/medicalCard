@@ -25,11 +25,12 @@ class ArticleTable extends Component {
         return (
             <tr>
                 {
-                    userRole == "Doctor" ? null :
+                    userRole == "Admin" ? 
                     <td>
                         <button onClick={this.onHandleManage}>редактировать</button>
                         <button onClick={this.onHandleDelete}>удалить</button>
-                    </td>
+                    </td> : null
+                    
                 }
                 
                 <td>{ this.props.OMC }</td>

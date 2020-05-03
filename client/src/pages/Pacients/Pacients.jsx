@@ -39,8 +39,8 @@ class Pacients extends Component {
             return (
                 <section id="pacients">
                     <Search />
-                    <div id="pacients-table">
-                        <table>
+                    <div className="pacients-table">
+                        <table className="pacients-table-content">
                            <TableHead role={ role } />
                            <TableBody search={ search } users={ users }/>
                         </table>
