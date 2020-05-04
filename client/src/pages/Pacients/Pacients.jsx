@@ -10,7 +10,6 @@ import Alert from "../../components/Alert/Alert.jsx"
 import propTypes from "prop-types";
 import "./Pacients.sass";
 
-
 class Pacients extends Component {
 
     state = {
@@ -39,7 +38,7 @@ class Pacients extends Component {
             return (
                 <section id="pacients">
                     <Search />
-                    <div className="pacients-table">
+                    <div className="table-wrap">
                         <table className="pacients-table-content">
                            <TableHead role={ role } />
                            <TableBody search={ search } users={ users }/>

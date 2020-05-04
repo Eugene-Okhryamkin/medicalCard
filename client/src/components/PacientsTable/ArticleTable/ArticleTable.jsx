@@ -3,6 +3,8 @@ import propTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteUser } from "../../../actions/deleteUser";
 import { selectUser } from "../../../actions/selectToManageUser";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import "./ArticleTable.sass";
 
 class ArticleTable extends Component {
@@ -16,7 +18,7 @@ class ArticleTable extends Component {
     onHandleDelete = e => {
         e.preventDefault();
         const { deleteUser, id } = this.props;
-        deleteUser({id});
+        deleteUser({ id });
     }
 
     render() {
@@ -25,44 +27,52 @@ class ArticleTable extends Component {
         return (
             <tr>
                 {
-                    userRole == "Admin" ? 
+                    userRole == "Admin" ?
                     <td>
-                        <button onClick={this.onHandleManage}>редактировать</button>
-                        <button onClick={this.onHandleDelete}>удалить</button>
-                    </td> : null
-                    
+                        <table className="manage-table">
+                            <tbody>
+
+                                <tr className="manage-table-row"> 
+                                    <td className="manageButton"><FontAwesomeIcon icon={ faEdit } onClick={ this.onHandleManage } /></td>
+                                    <td className="manageButton"><FontAwesomeIcon icon={faTrashAlt} onClick={ this.onHandleDelete } /></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>    : null
+
                 }
-                
-                <td>{ this.props.OMC }</td>
-                <td>{ this.props.CodeOfExemption }</td>
-                <td>{ this.props.SNILS }</td>
-                <td>{ this.props.Surname }</td>
-                <td>{ this.props.Name }</td>
-                <td>{ this.props.MiddleName }</td>
-                <td>{ this.props.Gender }</td>
-                <td>{ this.props.DateOfBirth }</td>
-                <td>{ this.props.LiveArea }</td>
-                <td>{ this.props.LiveRegion }</td>
-                <td>{ this.props.LiveSettlement }</td>
-                <td>{ this.props.LiveNeighborhood }</td>
-                <td>{ this.props.LiveHouse }</td>
-                <td>{ this.props.LiveHousing }</td>
-                <td>{ this.props.LiveAppartment }</td>
-                <td>{ this.props.StayArea }</td>
-                <td>{ this.props.StayRegion }</td>
-                <td>{ this.props.StaySettlement }</td>
-                <td>{ this.props.StayNeighborhood }</td>
-                <td>{ this.props.StayHouse }</td>
-                <td>{ this.props.StayHousing }</td>
-                <td>{ this.props.StayAppartment }</td>
-                <td>{ this.props.HomePhoneNumber }</td>
-                <td>{ this.props.RightToPreferentialService }</td>
-                <td>{ this.props.Disability }</td>
-                <td>{ this.props.PlaceOfWork }</td>
-                <td>{ this.props.Proffession }</td>
-                <td>{ this.props.Position }</td>
-                <td>{ this.props.Dependant }</td>
-                <td>{ this.props.Passport }</td>
+
+                <td>{this.props.OMC}</td>
+                <td>{this.props.CodeOfExemption}</td>
+                <td>{this.props.SNILS}</td>
+                <td>{this.props.Surname}</td>
+                <td>{this.props.Name}</td>
+                <td>{this.props.MiddleName}</td>
+                <td>{this.props.Gender}</td>
+                <td>{this.props.DateOfBirth}</td>
+                <td>{this.props.LiveArea}</td>
+                <td>{this.props.LiveRegion}</td>
+                <td>{this.props.LiveSettlement}</td>
+                <td>{this.props.LiveNeighborhood}</td>
+                <td>{this.props.LiveHouse}</td>
+                <td>{this.props.LiveHousing}</td>
+                <td>{this.props.LiveAppartment}</td>
+                <td>{this.props.StayArea}</td>
+                <td>{this.props.StayRegion}</td>
+                <td>{this.props.StaySettlement}</td>
+                <td>{this.props.StayNeighborhood}</td>
+                <td>{this.props.StayHouse}</td>
+                <td>{this.props.StayHousing}</td>
+                <td>{this.props.StayAppartment}</td>
+                <td>{this.props.HomePhoneNumber}</td>
+                <td>{this.props.RightToPreferentialService}</td>
+                <td>{this.props.Disability}</td>
+                <td>{this.props.PlaceOfWork}</td>
+                <td>{this.props.Proffession}</td>
+                <td>{this.props.Position}</td>
+                <td>{this.props.Dependant}</td>
+                <td>{this.props.Passport}</td>
             </tr>
         )
 
@@ -107,7 +117,7 @@ ArticleTable.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    userRole: state.auth.user.role 
+    userRole: state.auth.user.role
 })
 
 const mapDispatchToProps = dispatch => ({

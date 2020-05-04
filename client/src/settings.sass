@@ -25,49 +25,39 @@ $OSr: "Open Sans"
     
 
 /*DEFAULT*/
+.manageButton
+    cursor: pointer        
 
-// table 
-//     width: 100%
-//     overflow-y: scroll
+.pacients-table-content
+    width: unset
 
+table 
+    width: 100%
+    background: #fff
 
-// tr
+td, th 
+    padding: 
+        left: 30px 
+        right: 30px
+    
+tr 
+    border: none
+    &:nth-child(even)
+        background: $gray
 
-//     &:nth-child(odd) 
-//         background: white
+th
+    @include font($OSr, 600, 16px, #000)
             
-//     &:nth-child(even) 
-//         background: $gray
-        
+td 
+    text-align: center
+    @include font($OSr, normal, 14px, #000)    
 
+.table-wrap
+    display: flex
+    height: 70vh
+    overflow-y: scroll 
+    overflow-x: scroll
 
-// td
-//     height: 100%
-//     width: 100% 
-//     text-align: center 
-//     @include font($OSr, normal, 14px, #000)
-     
-
-//     &:nth-child(2)
-//         padding-left: 10px
-                
-
-//     &:nth-child(3)
-//         flex-basis: 20%
-    
- 
-
-// th 
-//     width: 100%
-//     border-bottom: 3px solid $gray
-//     padding: 0px 10px 0px 10px
-//     text-align: center
-//     @include font($OSr, bold, 14px, #000)
-
-    
-
-//     @media screen and(max-width: 800px)
-//         overflow-x: scroll
 
 input 
     display: flex 

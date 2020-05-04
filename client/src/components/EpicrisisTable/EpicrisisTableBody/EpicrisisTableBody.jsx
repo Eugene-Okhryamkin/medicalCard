@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import propTypes from "prop-types";
 import "./EpicrisisTableBody.sass";
 
@@ -12,7 +14,7 @@ class EpicrisisTableBody extends Component {
 
             template = epicrisisData.map((item) => (
                 <tr key={item.Epicrisis.idEpicrisis}>
-                    <td>Скачать</td>
+                    <td className="manageButton"><FontAwesomeIcon icon={ faDownload } /></td>
                     <td>{item.Epicrisis.Date}</td>
                     <td>{item.Surname}</td>
                     <td>{item.Name}</td>

@@ -35,8 +35,8 @@ class EpicrisisPacientTable extends Component {
     render() {
         // const { pacients } = this.props;
         return (
-            <div className="epicrisis-table-upload">
-                <table className="epicrisis-table">
+            <div className="table-wrap">
+                <table>
                     <thead>
                         <tr>
                             <th>Выбор</th>

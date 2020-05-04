@@ -17,7 +17,7 @@ class EpicrisisTable extends Component {
         const { epicrisis } = this.props;
 
         return (
-            <div id="epicrisis-table">
+            <div className="table-wrap">
                 <table>
                     <EpicrisisTableHeader /> 
                     <EpicrisisTableBody epicrisisData={ epicrisis } />   
