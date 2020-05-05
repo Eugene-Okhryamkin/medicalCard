@@ -20,7 +20,7 @@ export const getUsers = (state = initState, action) => {
             return { ...state, users: action.payload, isFetching: false,  error: "" } 
             
         case DELETE_USER_REQUEST:
-            return { ...state, users: state.users.filter(el => el.idpacient !== action.payload.id), isFetching: false } 
+            return { ...state, users: state.users.filter(el => el.idpacient !== action.payload.id), isFetching: false }     
 
         default: 
             return state    

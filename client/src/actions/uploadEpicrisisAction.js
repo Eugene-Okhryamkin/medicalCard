@@ -2,10 +2,10 @@ export const UPLOAD_EPICRISIS_REQUEST = "UPLOAD_EPICRISIS_REQUEST";
 export const UPLOAD_EPICRISIS_SUCCESSFUL = "UPLOAD_EPICRISIS_SUCCESSFUL";
 export const UPLOAD_EPICRISIS_FAIL = "UPLOAD_EPICRISIS_FAIL";
 
-export const uploadEpicrisis = (file, user) => dispatch => {
+export const uploadEpicrisis = file => dispatch => {
     dispatch({
         type: UPLOAD_EPICRISIS_REQUEST,
-        payload: [file, user]
+        payload: file
     })
 
     return fetch("/api/epicrisis/upload", {

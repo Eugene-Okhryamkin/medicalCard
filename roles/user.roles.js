@@ -1,10 +1,7 @@
 const roles = require("user-groups-roles");
+const index = require("./index.role")
 
 module.exports = (
-    roles.createNewRole("Admin"),
-    roles.createNewRole("Pacient"),
-    roles.createNewRole("Doctor"),
-        
     roles.createNewPrivileges(["/update", "POST"], "update user", false),
     roles.createNewPrivileges(["/add", "POST"], "add user", false),
     roles.createNewPrivileges(["/login", "POST"], "login user", false),

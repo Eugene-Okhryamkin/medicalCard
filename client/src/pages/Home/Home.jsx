@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Article from "../../components/Article/Article.jsx";
 import MainInfo from "../../components/MainInfo/MainInfo.jsx";
+import EpicrisisInfo from "../../components/EpicrisisInfo/EpicrisisInfo.jsx";
 import propTypes from "prop-types";
 import "./Home.sass";
 
@@ -13,6 +14,9 @@ class Home extends Component {
             <section id="Home">
                 <Article name="Основная информация" >
                     <MainInfo userInfo={ userInfo } />
+                </Article>
+                <Article name="Мои эпикризы">
+                    <EpicrisisInfo />
                 </Article>
             </section>
         )

@@ -12,6 +12,7 @@ export const addUser = userObj => dispatch => {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            "Accept": "application/json; odata=verbose",
             Authorization: localStorage.getItem("authData")
         },
         body: JSON.stringify(userObj)

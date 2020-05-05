@@ -32,7 +32,7 @@ exports.addUser = async (req, res) => {
     
             await User.create(req.body);
     
-            return res.sendStatus(201).json({ message: "Пациент успешно зарегистрирован" });
+            return res.status(201).json({ message: "Пациент успешно зарегистрирован" });
         } else {
             return res.json({ error: "Запрещено" })
         }

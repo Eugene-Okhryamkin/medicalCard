@@ -22,16 +22,17 @@ class Pacients extends Component {
     }
     
     componentDidUpdate(prevProps) {
-        const { getUsers, selectUser } = this.props;
+        const { getUsers, selectUser, addUser } = this.props;
         prevProps.selectUser != selectUser ? getUsers("/api/users/get") : selectUser
+        prevProps.addUser != addUser ? getUsers("/api/users/get") : getUsers
     }
 
 
     render() {
         const { editIsOpen } = this.state;
         const { search, selectUser, closeEditPage, error, role } = this.props;
-        let { users } = this.props;
-        
+        let { users, isFetching } = this.props;
+
         if(error.length) {
             return <Alert alertMessage={ error } success={ false } />
         } else {
@@ -41,7 +42,7 @@ class Pacients extends Component {
                     <div className="table-wrap">
                         <table className="pacients-table-content">
                            <TableHead role={ role } />
-                           <TableBody search={ search } users={ users }/>
+                           <TableBody search={ search } users={ users } isFetching={ isFetching } />
                         </table>
                         { selectUser != null ? <Edit close={() => closeEditPage(null) }/> : null }
                         { editIsOpen ? <Edit close={ () => this.setState({ editIsOpen: false }) } /> : null }
@@ -57,7 +58,9 @@ class Pacients extends Component {
 
 const mapStateToProps = state => ({
     search: state.search.search,
+    addUser: state.addUser.user,
     users: state.getUsers.users,
+    isFetching: state.getUsers.isFetching,
     selectUser: state.selectUser.selectedUser,
     error: state.getUsers.error,
     role: state.auth.user.role
@@ -72,6 +75,8 @@ Pacients.propTypes = {
     search: propTypes.string,
     users: propTypes.array,
     getUsers: propTypes.func,
+    addUser: propTypes.object,
+    isFetching: propTypes.bool,
     closeEditPage: propTypes.func,
     selectUser: propTypes.object,
     error: propTypes.string,

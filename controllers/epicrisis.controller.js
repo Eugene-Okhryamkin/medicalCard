@@ -1,6 +1,8 @@
 const Epicrisis = require("../models/epicrisis.model").Epicrisis;
 const User = require("../models/user.model").User;
 const decode = require("jwt-decode");
+const epicrisisRole = require("../roles/epicrisis.role");
+const roles = require("user-groups-roles");
 
 const decodeAuthorization = authorization => decode(authorization);
 
@@ -30,9 +32,15 @@ exports.uploadEpicrisis = async (req, res) => {
         const Passport = req.body.userData.toString();
         const Doctor = decodedToken.Passport.toString();
         const Date = getDate().toString();
+        const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/upload", "POST");
 
-        await Epicrisis.create({ Date, Passport, LinkToFile, Doctor });
-        res.status(200).json({ message: "Загружено" })
+        if(val) {
+            await Epicrisis.create({ Date, Passport, LinkToFile, Doctor });
+            return res.status(200).json({ message: "Загружено" })
+        } else {
+            return res.status(403).json({ error: "Запрещено" })
+        }
+        
     } catch(err) {
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" })
         console.error(err);
@@ -42,6 +50,7 @@ exports.uploadEpicrisis = async (req, res) => {
 exports.getAllEpicrisis = async (req, res) => {
     try {
         const decodedToken = await decodeAuthorization(req.headers.authorization);
+        const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/get", "GET");
 
         User.belongsTo(Epicrisis, {
             targetKey: "Passport",
@@ -53,21 +62,25 @@ exports.getAllEpicrisis = async (req, res) => {
             foreignKey: "Doctor"
         });
 
-        const epicrisisOfUser = await User.findAll({
-            attributes: ["Surname", "Name", "MiddleName"],
-            include: [{
-                model: Epicrisis,
-                attributes: ["idEpicrisis","Date"],
-                include: {
-                    model: User,
-                    attributes: ["Surname", "Name", "MiddleName"],
-                    where: Epicrisis.Doctor == User.Passport
-                }
-            }]
-        });
+        if(val) {
+            const epicrisis = await User.findAll({
+                attributes: ["Surname", "Name", "MiddleName"],
+                include: [{
+                    model: Epicrisis,
+                    attributes: ["idEpicrisis","Date"],
+                    include: [{
+                        model: User,
+                        attributes: ["Surname", "Name", "MiddleName"],
+                        where: Epicrisis.Doctor == User.Passport
+                    }]
+                }]
+            });
 
+            return res.status(200).json(epicrisis);
+        } else {
+            return res.status(403).json({ error: "Запрещено" })
+        }
 
-        res.status(200).json(epicrisisOfUser);
 
     } catch(err) {
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
@@ -75,20 +88,43 @@ exports.getAllEpicrisis = async (req, res) => {
     } 
 };
 exports.getConcreteEpicrisis = async (req, res) => {
-    const decodedToken = await decodeAuthorization(req.headers.authorization);
-
     try {
+        const decodedToken = await decodeAuthorization(req.headers.authorization);
+        const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/concrete", "GET");
+
         User.belongsTo(Epicrisis, {
             targetKey: "Passport",
             foreignKey: "Passport"
-        })
+        });
 
-        const epicrisis = await User.findOne({
-            where: decodedToken.Passport == Epicrisis.Passport,
-            include: [Epicrisis]
-        })
+        Epicrisis.belongsTo(User, {
+            targetKey: "Passport",
+            foreignKey: "Doctor"
+        });
 
-        res.status(200).json(epicrisis);
+        const { Passport } = decodedToken;
+
+        if(val) {
+            const epicrisisOfUser = await User.findAll({
+                attributes: ["Surname", "Name", "MiddleName"],
+                where: { Passport },
+                include: [{
+                    model: Epicrisis,
+                    attributes: ["idEpicrisis","Date"],
+                    include: {
+                        model: User,
+                        attributes: ["Surname", "Name", "MiddleName"],
+                        where: Epicrisis.Doctor == User.Passport
+                    }
+                }]
+            });
+    
+            return res.status(200).json(epicrisisOfUser);
+        } else {
+            return res.status(403).json({ error: "Запрещено" })
+        }
+
+        
 
     } catch(err) {
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
@@ -96,4 +132,27 @@ exports.getConcreteEpicrisis = async (req, res) => {
     }
 };
 
-exports.downloadEpicrisis = (req, res) => {};
+exports.downloadEpicrisis = async (req, res) => {
+    try {
+        const decodedToken = await decodeAuthorization(req.headers.authorization);
+        const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/download", "POST");
+
+        const { id } = req.body;
+        
+        if(val) {
+            const epicrisis = await Epicrisis.findOne({
+                where: { idEpicrisis: id }
+            })
+    
+            return res.download(epicrisis.LinkToFile);
+        } else {
+            return res.status(403).json({ error: "Запрещено" })
+        }
+
+        
+        
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
+    }
+};

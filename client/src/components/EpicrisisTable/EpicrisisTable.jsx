@@ -13,14 +13,19 @@ class EpicrisisTable extends Component {
         getEpicrisis("/api/epicrisis/get");
     }
 
+    componentDidUpdate(prevProps) {
+        const { getEpicrisis, uploadEpicrisis } = this.props;
+        prevProps.uploadEpicrisis != uploadEpicrisis ? getEpicrisis("/api/epicrisis/get") : uploadEpicrisis
+    }
+
     render() {
-        const { epicrisis } = this.props;
+        const { epicrisis, isFetching } = this.props;
 
         return (
             <div className="table-wrap">
                 <table>
                     <EpicrisisTableHeader /> 
-                    <EpicrisisTableBody epicrisisData={ epicrisis } />   
+                    <EpicrisisTableBody epicrisisData={ epicrisis } isFetching={ isFetching } />   
                 </table>
             </div>
         )
@@ -28,7 +33,9 @@ class EpicrisisTable extends Component {
 }
 
 const mapStateToProps = state => ({
-    epicrisis: state.getEpicrisis.epicrisis
+    epicrisis: state.getEpicrisis.epicrisis,
+    uploadEpicrisis: state.uploadEpicrisis.epicrisis,
+    isFetching: state.getEpicrisis.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -37,7 +44,9 @@ const mapDispatchToProps = dispatch => ({
 
 EpicrisisTable.propTypes = {
     epicrisis: propTypes.array,
-    getEpicrisis: propTypes.func
+    isFetching: propTypes.bool,
+    getEpicrisis: propTypes.func,
+    uploadEpicrisis: propTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EpicrisisTable);

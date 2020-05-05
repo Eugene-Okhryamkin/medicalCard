@@ -8,6 +8,7 @@ import { addUser } from "../../actions/addUserAction";
 import propTypes from "prop-types";
 import "./Edit.sass";
 
+
 class Edit extends Component {
 
     state = {}

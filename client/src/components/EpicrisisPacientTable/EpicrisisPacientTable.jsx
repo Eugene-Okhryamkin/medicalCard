@@ -16,7 +16,7 @@ class EpicrisisPacientTable extends Component {
             template = pacients.map(item => {
                 return (
                     <tr key={item.idpacient} >
-                        <td><input type="radio" name="selected" onChange={() => this.setUser(item.idpacient) } /></td>
+                        <td><input type="radio" name="selected" onChange={() => this.setUser(item.Passport) } /></td>
                         <td>{item.OMC}</td>
                         <td>{item.Surname}</td>
                         <td>{item.Name}</td>

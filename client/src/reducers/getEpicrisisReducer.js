@@ -1,7 +1,7 @@
 import { EPICRISIS_REQUEST, EPICRISIS_SUCCESSFUL, EPICRISIS_FAIL } from "../actions/getEpicrisisAction";
 
 const initState = {
-    epicrisis: null,
+    epicrisis: [],
     isFetching: false,
     error: "" 
 }
@@ -9,10 +9,10 @@ const initState = {
 export const getEpicrisis = (state = initState, action) => {
     switch(action.type) {
         case EPICRISIS_REQUEST:
-            return { ...state, epicrisis: null, isFetching: true, error: "" }
+            return { ...state, epicrisis: [], isFetching: true, error: "" }
 
         case EPICRISIS_FAIL:
-            return { ...state, epicrisis: null, isFetching: false, error: action.payload }
+            return { ...state, epicrisis: [], isFetching: false, error: action.payload }
         
         case EPICRISIS_SUCCESSFUL:   
             return { ...state, epicrisis: action.payload, isFetching: false, error: "" }
