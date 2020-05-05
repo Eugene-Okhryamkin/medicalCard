@@ -13,6 +13,9 @@
 #header_active
     @extend #header
     transform: translateX(25%)
+    
+    @media screen and(max-width: 800px)
+        transform: translateX(80%)
 
 #header-container
     display: flex 
@@ -29,6 +32,10 @@
     .fa-bars
         color: #fff 
         font-size: 25px
+        @media screen and(max-width: 800px)
+            font-size: 20px
 
 #top-username
-    @include font($OSr, normal, 16px, #fff)        
+    @include font($OSr, normal, $NormalSize, #fff)        
+    @media screen and(max-width: 800px)
+            font-size: $MinimalSize

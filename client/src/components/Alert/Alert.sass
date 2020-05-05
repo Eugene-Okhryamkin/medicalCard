@@ -9,4 +9,6 @@
     margin-top: 20px 
 
     p 
-        @include font($OSr, normal, 15px, #000)
+        @include font($OSr, normal, $NormalSize, #000)
+        @media screen and(max-width: 800px)
+            font-size: $MinimalSize

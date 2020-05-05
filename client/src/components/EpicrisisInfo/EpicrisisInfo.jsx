@@ -16,10 +16,12 @@ class EpicrisisInfo extends Component {
         const { epicrisis } = this.props;
         console.log(epicrisis);
         return (
-            <table>
-                <EpicrisisInfoHeader />
-                <EpicrisisInfoBody epicrisis={ epicrisis } />
-            </table>
+            <div className="table-wrap">
+                <table>
+                    <EpicrisisInfoHeader />
+                    <EpicrisisInfoBody epicrisis={epicrisis} />
+                </table>
+            </div>
         )
     }
 }

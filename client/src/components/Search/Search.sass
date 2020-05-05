@@ -12,7 +12,9 @@
         width: 100%
         border: none
         padding: 0px 0px 0px 15px
-        @include font($OSr, normal, 14px, $blue)
+        @include font($OSr, normal, $NormalSize, $blue)
+        @media screen and(max-width: 800px)
+            font-size: $MinimalSize
         
         &:focus
             box-shadow: 0 0 3px
