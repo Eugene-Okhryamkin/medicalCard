@@ -17,6 +17,7 @@ const app = express();
 const homeRouter = require("./routes/home.router");
 const userRouter = require("./routes/user.router");
 const epicrisisRouter = require("./routes/epicrisis.router");
+const exemptionsRouter = require("./routes/documentForGetExemption.router");
 
 
 app.use(cors());
@@ -25,6 +26,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/api/users", userRouter);
 app.use("/api/epicrisis", epicrisisRouter);
+app.use("/api/exemptions", exemptionsRouter);
 app.use("/", homeRouter);
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));

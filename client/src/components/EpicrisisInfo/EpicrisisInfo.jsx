@@ -14,7 +14,7 @@ class EpicrisisInfo extends Component {
 
     render() {
         const { epicrisis } = this.props;
-        console.log(epicrisis);
+
         return (
             <div className="table-wrap">
                 <table>

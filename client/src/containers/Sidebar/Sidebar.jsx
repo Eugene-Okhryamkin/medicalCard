@@ -32,6 +32,9 @@ class Sidebar extends Component {
                             <NavLink to={"/epicrisis"} className="ListItem" >Эпикризы</NavLink>
                         </li>
                         <li>
+                            <NavLink to={"/exemption"} className="ListItem">Льготы</NavLink>
+                        </li>
+                        <li>
                             <a href="#" onClick={this.logout} className="ListItem" >Выход</a>
                         </li>
                     </ul>

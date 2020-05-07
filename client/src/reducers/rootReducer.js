@@ -9,6 +9,9 @@ import { updateUser } from "./updateUserReducer";
 import { addUser } from "./addUserReducer";
 import { getEpicrisis } from "./getEpicrisisReducer";
 import { uploadEpicrisis } from "./uploadEpicrisisReducer";
+import { getDocuments } from "./getDocumentsReducer";
+import { addDocument } from "./addDocumentReducer";
+import { deleteDocument } from "./deleteDocumentReducer";
 
 export const rootReducer = combineReducers({
     toggleMenu: toggleMenu,
@@ -20,5 +23,8 @@ export const rootReducer = combineReducers({
     updateUser: updateUser,
     addUser: addUser,
     getEpicrisis: getEpicrisis,
-    uploadEpicrisis: uploadEpicrisis
+    uploadEpicrisis: uploadEpicrisis,
+    getDocuments: getDocuments,
+    addDocument: addDocument,
+    deleteDocument: deleteDocument
 });

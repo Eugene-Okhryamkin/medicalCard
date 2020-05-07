@@ -26,7 +26,6 @@ class Article extends Component {
         const { name } = this.props;
         const { isOpen } = this.state;
 
-        console.log(this.state);
         return (
             <div className="Article" onClick={ this.onHandleOpen }>
                 <div className="Article-container">

@@ -47,8 +47,8 @@ class Pacients extends Component {
                         { selectUser != null ? <Edit close={() => closeEditPage(null) }/> : null }
                         { editIsOpen ? <Edit close={ () => this.setState({ editIsOpen: false }) } /> : null }
                     </div>
-                    <div id="add-btn-wrap"> 
-                        <button id="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                    <div className="add-btn-wrap"> 
+                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
                     </div>
                 </section>
             )

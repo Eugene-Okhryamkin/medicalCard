@@ -44,9 +44,9 @@ class Edit extends Component {
         const { updatedUserMessage, updatedUserError } = this.props;
 
         return (
-            <section id="edit">
-                <div id="edit-main">
-                    <div id="mainData-inputs">
+            <section className="edit">
+                <div className="edit-main">
+                    <div className="mainData-inputs">
                         <input type="text" onChange={this.onHandleEdit} value={this.state.OMC || ""} placeholder="OMC" name="OMC" required />
                         <input type="text" onChange={this.onHandleEdit} value={this.state.CodeOfExemption || ""} placeholder="Код льготы" name="CodeOfExemption" required />
                         <input type="text" onChange={this.onHandleEdit} value={this.state.SNILS || ""} placeholder="СНИЛС" name="SNILS" required />

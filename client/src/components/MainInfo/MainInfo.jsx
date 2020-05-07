@@ -5,7 +5,6 @@ import "./MainInfo.sass";
 class MainInfo extends Component {
     render() {
         const { userInfo } = this.props;
-        console.log(userInfo);
         return (
             <div id="main-info">
                 <div className="table-wrap">

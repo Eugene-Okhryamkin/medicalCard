@@ -5,6 +5,6 @@ exports.storageConfigForEpicrisis = multer.diskStorage({
         cb(null, "uploads/epicrisis")
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname + Date.now())
+        cb(null, Date.now() + file.originalname)
     }
 });
