@@ -12,6 +12,10 @@ import { uploadEpicrisis } from "./uploadEpicrisisReducer";
 import { getDocuments } from "./getDocumentsReducer";
 import { addDocument } from "./addDocumentReducer";
 import { deleteDocument } from "./deleteDocumentReducer";
+import { getDiagnosis } from "./getDiagnosisReducer";
+import { addDiagnosis } from "./addDiagnosisReducer";
+import { updateDiagnosis } from "./updateDiagnosisReducer";
+import { deleteDiagnosis } from "./deleteDiagnosisReducer";
 
 export const rootReducer = combineReducers({
     toggleMenu: toggleMenu,
@@ -26,5 +30,9 @@ export const rootReducer = combineReducers({
     uploadEpicrisis: uploadEpicrisis,
     getDocuments: getDocuments,
     addDocument: addDocument,
-    deleteDocument: deleteDocument
+    deleteDocument: deleteDocument,
+    getDiagnosis: getDiagnosis,
+    addDiagnosis: addDiagnosis,
+    updateDiagnosis: updateDiagnosis,
+    deleteDiagnosis: deleteDiagnosis
 });

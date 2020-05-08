@@ -6,6 +6,7 @@ import Auth from "../Auth/Auth.jsx";
 import Home from "../Home/Home.jsx";
 import Pacients from "../Pacients/Pacients.jsx";
 import Epicrisis from "../Epicrisis/Epicrisis.jsx";
+import Diagnosis from "../Diagnosis/Diagnosis.jsx";
 import DocumentsForGetExemption from "../DocumentsForGetExemption/DocumentsForGetExemption.jsx";
 import jwtDecode from "jwt-decode";
 import propTypes from "prop-types";
@@ -36,6 +37,7 @@ class Main extends Component {
                             <Route exact path={"/pacients"} component={ Pacients } />
                             <Route exact path={"/epicrisis"} component={ Epicrisis } />
                             <Route exact path={"/exemption"} component={ DocumentsForGetExemption } />
+                            <Route exact path={"/diagnosis"} component={ Diagnosis } />
                             <Redirect to="/" />
                         </Switch>
                     </div>

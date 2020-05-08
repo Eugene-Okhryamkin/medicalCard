@@ -17,14 +17,17 @@ class ExemptionInfo extends Component {
 
         if(documents.length) {
             template = documents.map(item => {
-                return (
-                    <tr key={ item.idDocumentForGetExemption }>
-                        <td>{ item.Num }</td>
-                        <td>{ item.Date }</td>
-                        <td>{ item.PayedBy }</td>
-                        <td>{ item.User.Surname } { item.User.MiddleName } { item.User.Name }</td>
-                    </tr>
-                )
+                if(item.User != null) {
+                    return (
+                        <tr key={ item.idDocumentForGetExemption }>
+                            <td>{ item.Num }</td>
+                            <td>{ item.Date }</td>
+                            <td>{ item.PayedBy }</td>
+                            <td>{ item.User.Surname } { item.User.MiddleName } { item.User.Name }</td>
+                        </tr>
+                    )
+                }
+                
             })
 
             return template;

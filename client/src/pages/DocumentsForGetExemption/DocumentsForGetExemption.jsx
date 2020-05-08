@@ -16,7 +16,6 @@ class DocumentsForGetExemption extends Component {
     componentDidUpdate(prevProps) {
         const { documents } = this.props;
         prevProps.documents != documents ? getDocuments("/api/exemption/get") : documents
-        console.log(documents);
     }
 
     render() {

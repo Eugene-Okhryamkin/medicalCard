@@ -9,8 +9,6 @@ import { deleteDocument } from "../../../actions/deleteDocumentForGetExemptionAc
 
 class DocumentsForGetExemptionTableBody extends Component {
 
-    state = {}
-
     onHandleManage = item => {
         const { selectUser } = this.props;
         selectUser(item);
