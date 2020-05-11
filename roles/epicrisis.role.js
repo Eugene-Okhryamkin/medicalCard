@@ -21,6 +21,11 @@ module.exports = (
     roles.addPrivilegeToRole("Doctor", ["/upload", "POST"], true),
     roles.addPrivilegeToRole("Doctor", ["/concrete", "GET"], true),
     roles.addPrivilegeToRole("Doctor", ["/download", "POST"], true),
-    roles.addPrivilegeToRole("Doctor", ["/get", "GET"], true)
+    roles.addPrivilegeToRole("Doctor", ["/get", "GET"], true),
+
+    roles.addPrivilegeToRole("technikalDoctor", ["/upload", "POST"], false),
+    roles.addPrivilegeToRole("technikalDoctor", ["/concrete", "GET"], true),
+    roles.addPrivilegeToRole("technikalDoctor", ["/download", "POST"], true),
+    roles.addPrivilegeToRole("technikalDoctor", ["/get", "GET"], false)
 )
 

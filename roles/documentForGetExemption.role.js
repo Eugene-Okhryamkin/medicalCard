@@ -24,5 +24,11 @@ module.exports = (
     roles.addPrivilegeToRole("Doctor", ["/get", "GET"], "get document for get exemption", true),
     roles.addPrivilegeToRole("Doctor", ["/concrete", "GET"], "get concrete document for get exemption", true),
     roles.addPrivilegeToRole("Doctor", ["/delete", "POST"], "delete document for get exemption", false),
-    roles.addPrivilegeToRole("Doctor", ["/update", "POST"], "update document for get exemption", false)
+    roles.addPrivilegeToRole("Doctor", ["/update", "POST"], "update document for get exemption", false),
+
+    roles.addPrivilegeToRole("technikalDoctor", ["/add", "POST"], "add document for get exemption", false),
+    roles.addPrivilegeToRole("technikalDoctor", ["/get", "GET"], "get document for get exemption", false),
+    roles.addPrivilegeToRole("technikalDoctor", ["/concrete", "GET"], "get concrete document for get exemption", true),
+    roles.addPrivilegeToRole("technikalDoctor", ["/delete", "POST"], "delete document for get exemption", false),
+    roles.addPrivilegeToRole("technikalDoctor", ["/update", "POST"], "update document for get exemption", false)   
 )

@@ -19,7 +19,7 @@ const userRouter = require("./routes/user.router");
 const epicrisisRouter = require("./routes/epicrisis.router");
 const exemptionsRouter = require("./routes/documentForGetExemption.router");
 const diagnsosisRouter = require("./routes/diagnosis.router");
-
+const xrayRouter = require("./routes/XRay.router")
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -29,6 +29,7 @@ app.use("/api/users", userRouter);
 app.use("/api/epicrisis", epicrisisRouter);
 app.use("/api/exemptions", exemptionsRouter);
 app.use("/api/diagnosis", diagnsosisRouter);
+app.use("/api/xray", xrayRouter);
 app.use("/", homeRouter);
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));
