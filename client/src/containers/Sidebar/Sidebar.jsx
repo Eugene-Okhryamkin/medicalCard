@@ -14,6 +14,73 @@ class Sidebar extends Component {
         this.props.logoutUser();
     }
 
+    renderMenu = () => {
+        const { user } = this.props;
+        
+        if(user != null) {
+            switch(user.role) {
+                case "Admin":
+                    return (
+                        <>
+                            <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>
+                            <li><NavLink to={"/pacients"} className="ListItem" >Пациенты</NavLink></li>
+                            <li><NavLink to={"/epicrisis"} className="ListItem" >Эпикризы</NavLink></li>
+                            <li><NavLink to={"/exemption"} className="ListItem">Льготы</NavLink></li>
+                            <li><NavLink to={"/diagnosis"} className="ListItem">Диагнозы</NavLink></li>
+                            <li><NavLink to={"/xray"} className="ListItem">Рентгены</NavLink></li>
+                            <li><NavLink to={"/fluorography"} className="ListItem">Флюорография</NavLink></li>
+                            <li><NavLink to={"/blood"} className="ListItem">Анализы крови</NavLink></li>
+                            <li><NavLink to={"/urine"} className="ListItem" >Анализы мочи</NavLink></li>
+                            <li><NavLink to={"/stool"} className="ListItem" >Анализы кала</NavLink></li>
+                        </>
+                    );
+
+                case "Doctor": 
+                    return (
+                        <>
+                            <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>
+                            <li><NavLink to={"/pacients"} className="ListItem" >Пациенты</NavLink></li>
+                            <li><NavLink to={"/epicrisis"} className="ListItem" >Эпикризы</NavLink></li>
+                            <li><NavLink to={"/exemption"} className="ListItem">Льготы</NavLink></li>
+                            <li><NavLink to={"/diagnosis"} className="ListItem">Диагнозы</NavLink></li>
+                            <li><NavLink to={"/xray"} className="ListItem">Рентгены</NavLink></li>
+                            <li><NavLink to={"/fluorography"} className="ListItem">Флюорография</NavLink></li>
+                            <li><NavLink to={"/blood"} className="ListItem">Анализы крови</NavLink></li>
+                            <li><NavLink to={"/urine"} className="ListItem" >Анализы мочи</NavLink></li>
+                            <li><NavLink to={"/stool"} className="ListItem" >Анализы кала</NavLink></li>
+                        </>
+                    );
+
+                case "technikalDoctor": 
+                    return (
+                        <>
+                            <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>
+                            <li><NavLink to={"/pacients"} className="ListItem" >Пациенты</NavLink></li>
+                            <li><NavLink to={"/epicrisis"} className="ListItem" >Эпикризы</NavLink></li>
+                            <li><NavLink to={"/exemption"} className="ListItem">Льготы</NavLink></li>
+                            <li><NavLink to={"/diagnosis"} className="ListItem">Диагнозы</NavLink></li>
+                            <li><NavLink to={"/xray"} className="ListItem">Рентгены</NavLink></li>
+                            <li><NavLink to={"/fluorography"} className="ListItem">Флюорография</NavLink></li>
+                            <li><NavLink to={"/blood"} className="ListItem">Анализы крови</NavLink></li>
+                            <li><NavLink to={"/urine"} className="ListItem" >Анализы мочи</NavLink></li>
+                            <li><NavLink to={"/stool"} className="ListItem" >Анализы кала</NavLink></li>
+                        </>
+                    ); 
+
+                case "Pacient":
+                    return(
+                        <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>
+                    );
+                
+                default: 
+                    return null;
+            }
+        } else {
+            return null
+        }
+                
+    }
+
     render() {
         const { menuState } = this.props;
 
@@ -22,39 +89,8 @@ class Sidebar extends Component {
                 <a href="#" id="menu-btn"></a>
                 <nav id="menu-list">
                     <ul>
-                        <li>
-                            <NavLink to={"/"} className="ListItem" >Главная страница</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/pacients"} className="ListItem" >Пациенты</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/epicrisis"} className="ListItem" >Эпикризы</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/exemption"} className="ListItem">Льготы</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/diagnosis"} className="ListItem">Диагнозы</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/xray"} className="ListItem">Рентгены</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/fluorography"} className="ListItem">Флюорография</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/blood"} className="ListItem">Анализы крови</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/urine"} className="ListItem" >Анализы мочи</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to={"/stool"} className="ListItem" >Анализы кала</NavLink>
-                        </li>
-                        <li>
-                            <a href="#" onClick={this.logout} className="ListItem" >Выход</a>
-                        </li>
+                        {this.renderMenu()}
+                        <li><a href="#" onClick={this.logout} className="ListItem" >Выход</a></li>
                     </ul>
                 </nav>
             </aside>
@@ -64,7 +100,8 @@ class Sidebar extends Component {
 
 
 const mapStateToProps = state => ({
-    menuState: state.toggleMenu
+    menuState: state.toggleMenu,
+    user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -73,7 +110,8 @@ const mapDispatchToProps = dispatch => ({
 
 Sidebar.propTypes = {
     menuState: propTypes.object.isRequired,
-    logoutUser: propTypes.func.isRequired
+    logoutUser: propTypes.func.isRequired,
+    user: propTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);
