@@ -1,4 +1,4 @@
-const XRay = require("../models/XRay.model").XRay;
+const Fluorography = require("../models/Fluorography.model").Fluorography;
 const User = require("../models/user.model").User;
 const decode = require("jwt-decode");
 const db = require("../config/database");
@@ -6,16 +6,16 @@ const roles = require("user-groups-roles");
 
 const decodeAuthorization = authorization => decode(authorization);
 
-exports.addXRay = async (req, res) => {
+exports.addFluorography = async (req, res) => {
     try {
         const decodedToken = await decodeAuthorization(req.headers.authorization);
         const { Code, Date, Passport } = req.body;
-        const Doctor = decodedToken.Passport
+        const Doctor = decodedToken.Passport;
 
         const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/add", "POST");
 
         if(val) {
-            const candidate = await XRay.findOne({
+            const candidate = await Fluorography.findOne({
                 where: { Code }
             });
     
@@ -23,45 +23,46 @@ exports.addXRay = async (req, res) => {
                 return res.status(406).json({ error: "Такой снимок уже существует" })
             }
     
-            await XRay.create({
+            await Fluorography.create({
                 Code,
                 Date,
                 Passport,
                 Doctor
             });
     
-            return res.status(200).json({ message: "Рентген успешно добавлен" })
+            return res.status(200).json({ message: "Флюорография успешно добавлена" })
         } else {
             return res.status(403).json({ error: "Запрещено" })
         }
-        
 
     } catch(err) {
+        console.error(err);
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" })
     }
 }
 
-exports.getXRay = async (req, res) => {
+exports.getFluorography = async (req, res) => {
     try {
         const decodedToken = await decodeAuthorization(req.headers.authorization);
         const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/get", "GET");
 
-        User.belongsTo(XRay, {
+        
+        User.belongsTo(Fluorography, {
             targetKey: "Passport",
             foreignKey: "Passport",
         });
 
-        XRay.belongsTo(User, {
+        Fluorography.belongsTo(User, {
             targetKey: "Passport",
             foreignKey: "Doctor",
         });
 
 
         if(val) {
-            const xray = await User.findAll({
+            const fluorography = await User.findAll({
                 attributes: ["Surname", "Name", "MiddleName", "Passport"],
                 include: [{
-                    model: XRay,
+                    model: Fluorography,
                     required: true,
                     include: [{
                         model: User,
@@ -70,25 +71,25 @@ exports.getXRay = async (req, res) => {
                 }]
             })
 
-           return res.status(200).json(xray)
+           return res.status(200).json(fluorography)
         } else {
             return res.status(403).json({ error: "Запрещено" });
         }
-
     } catch(err) {
-        console.error(err)
-        res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" })
+        console.error(err);
+        res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" }) 
     }
+    
 }
 
-exports.updateXRay = async (req, res) => {
+exports.updateFluorography = async (req, res) => {
     try {
         const decodedToken = await decodeAuthorization(req.headers.authorization);
         const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/update", "POST")
         const { Code, Date, Passport } = req.body;
         if(val) {
 
-            XRay.update({ Code, Date, Passport }, {
+            Fluorography.update({ Code, Date, Passport }, {
                 where: { 
                     id: req.body.analisy.id 
                 }
@@ -105,14 +106,14 @@ exports.updateXRay = async (req, res) => {
     }
 }
 
-exports.deleteXRay = async (req, res) => {
+exports.deleteFluorography = async (req, res) => {
     try {
         const decodedToken = await decodeAuthorization(req.headers.authorization);
         const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/delete", "POST")
         const { id } = req.body;
 
         if(val) {
-            XRay.destroy({
+            Fluorography.destroy({
                 where: { id }
             })
     

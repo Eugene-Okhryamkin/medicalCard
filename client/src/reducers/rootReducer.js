@@ -16,6 +16,10 @@ import { getDiagnosis } from "./getDiagnosisReducer";
 import { addDiagnosis } from "./addDiagnosisReducer";
 import { updateDiagnosis } from "./updateDiagnosisReducer";
 import { deleteDiagnosis } from "./deleteDiagnosisReducer";
+import { getAnalisys } from "./getAnalisysReducer";
+import { addAnalisys } from "./addAnalisysReducer";
+import { updateAnalisys } from "./updateAnalisysReducer";
+import { deleteAnalisys } from "./deleteAnalisysReducer";
 
 export const rootReducer = combineReducers({
     toggleMenu: toggleMenu,
@@ -34,5 +38,9 @@ export const rootReducer = combineReducers({
     getDiagnosis: getDiagnosis,
     addDiagnosis: addDiagnosis,
     updateDiagnosis: updateDiagnosis,
-    deleteDiagnosis: deleteDiagnosis
+    deleteDiagnosis: deleteDiagnosis,
+    getAnalisys: getAnalisys,
+    addAnalisys: addAnalisys,
+    updateAnalisys: updateAnalisys,
+    deleteAnalisys: deleteAnalisys
 });

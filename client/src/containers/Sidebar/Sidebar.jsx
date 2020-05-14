@@ -38,6 +38,21 @@ class Sidebar extends Component {
                             <NavLink to={"/diagnosis"} className="ListItem">Диагнозы</NavLink>
                         </li>
                         <li>
+                            <NavLink to={"/xray"} className="ListItem">Рентгены</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/fluorography"} className="ListItem">Флюорография</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/blood"} className="ListItem">Анализы крови</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/urine"} className="ListItem" >Анализы мочи</NavLink>
+                        </li>
+                        <li>
+                            <NavLink to={"/stool"} className="ListItem" >Анализы кала</NavLink>
+                        </li>
+                        <li>
                             <a href="#" onClick={this.logout} className="ListItem" >Выход</a>
                         </li>
                     </ul>

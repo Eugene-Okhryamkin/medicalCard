@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import DiagnosisTable from "../../containers/DiagnosisTable/DiagnosisTable.jsx";
 import { connect } from "react-redux"; 
-import Search from "../../components/Search/Search.jsx"
-import { getDiagnosis } from "../../actions/getDiagnosis"
+import Search from "../../components/Search/Search.jsx";
+import { getDiagnosis } from "../../actions/getDiagnosis";
 import { selectUser } from "../../actions/selectToManageUser";
 import DiagnosisEdit from "../DiagnosisEdit/DiagnosisEdit.jsx";
 import propTypes from "prop-types";

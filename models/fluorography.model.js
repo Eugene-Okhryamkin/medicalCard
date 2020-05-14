@@ -1,9 +1,9 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../config/database");
 
-class XRay extends Model {};
+class Fluorography extends Model {};
 
-XRay.init({
+Fluorography.init({
     id: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -11,14 +11,14 @@ XRay.init({
         autoIncrement: true,
         primaryKey: true
     },
+    Date: {
+        type: DataTypes.STRING(45),
+        allowNull: false
+    },
     Code: {
         type: DataTypes.STRING(255),
         allowNull: false,
         unique: true
-    },
-    Date: {
-        type: DataTypes.STRING(45),
-        allowNull: false
     },
     Passport: {
         type: DataTypes.STRING(45),
@@ -32,13 +32,13 @@ XRay.init({
     sequelize: db,
     freezeTableName: true,
     timestamps: false,
-    tableName: "xray",
-    modelName: "analisys",
+    tableName: "fluorography",
+    modelName: "analisys"
 });
 
-XRay.sync();
+Fluorography.sync();
 
 module.exports = {
     db, 
-    XRay
+    Fluorography
 }    
