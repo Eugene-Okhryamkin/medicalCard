@@ -7,7 +7,8 @@ import { addAnalisys } from "../../actions/addAnalisysAction";
 import { updateAnalisys } from "../../actions/updateAnalisysAction";
 import { deleteAnalisys } from "../../actions/deleteAnalisysAction";
 import { selectUser } from "../../actions/selectToManageUser.js";
-import EditAnalisys from "../EditAnalisys/EditAnalisys.jsx"
+import EditAnalisys from "../EditAnalisys/EditAnalisys.jsx";
+import Alert from "../../components/Alert/Alert.jsx";
 import "./Fluorography.sass";
 
 class Fluorography extends Component {
@@ -38,29 +39,34 @@ class Fluorography extends Component {
 
 
     render() {
-        const { analisys, selectUser, selectedUser } = this.props;
+        const { analisys, selectUser, selectedUser, error } = this.props;
         const { editIsOpen } = this.state;
 
-        return (
-            <section className="analisys">
-                <div className="table-wrap">
-                    <AnalisysTable data={analisys} deleteData={data => this.deleteData(data)}  url="/api/fluorography/get" />
-                    { selectedUser != null ? <EditAnalisys update={ data => this.updateData(data) } close={() => selectUser(null) }/> : null }
-                    { editIsOpen ? <EditAnalisys send={ data => this.sendData(data) } close={ () => this.setState({ editIsOpen: false }) } /> : null }
-                </div>
-                <div className="add-btn-wrap">
-                    <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                </div>
-            </section>
-
-        )
+        if(error.length) {
+            return <Alert alertMessage={ error } success={ false } />
+        } else {
+            return (
+                <section className="analisys">
+                    <div className="table-wrap">
+                        <AnalisysTable data={analisys} deleteData={data => this.deleteData(data)}  url="/api/fluorography/get"  />
+                        { selectedUser != null ? <EditAnalisys update={ data => this.updateData(data) } close={() => selectUser(null) }/> : null }
+                        { editIsOpen ? <EditAnalisys send={ data => this.sendData(data) } close={ () => this.setState({ editIsOpen: false }) } /> : null }
+                    </div>
+                    <div className="add-btn-wrap">
+                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                    </div>
+                </section>
+    
+            )
+        }
     }
 }
 
 const mapStateToProps = state => ({
     analisys: state.getAnalisys.analisys,
     addAnalisys: state.addAnalisys.analisys,
-    selectedUser: state.selectUser.selectedUser
+    selectedUser: state.selectUser.selectedUser,
+    error: state.getUsers.error,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -79,7 +85,8 @@ Fluorography.propTypes = {
     addAnalisys: propTypes.func,
     updateAnalisys: propTypes.func,
     deleteAnalisys: propTypes.func,
-    addAnalis: propTypes.array
+    addAnalis: propTypes.array,
+    error: propTypes.string,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Fluorography);

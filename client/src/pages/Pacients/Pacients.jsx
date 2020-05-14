@@ -5,8 +5,9 @@ import { getUsers } from "../../actions/getUsersActions";
 import { selectUser } from "../../actions/selectToManageUser"
 import { TableHead } from "../../components/PacientsTable/TableHead/TableHead.jsx";
 import TableBody from "../../components/PacientsTable/TableBody/TableBody.jsx";
-import Edit from "../Edit/Edit.jsx"
-import Alert from "../../components/Alert/Alert.jsx"
+import Edit from "../Edit/Edit.jsx";
+import Alert from "../../components/Alert/Alert.jsx";
+import { Preloader } from "../../components/Preloader/Preloader.jsx";
 import propTypes from "prop-types";
 import "./Pacients.sass";
 
@@ -30,28 +31,33 @@ class Pacients extends Component {
 
     render() {
         const { editIsOpen } = this.state;
-        const { search, selectUser, closeEditPage, error, role } = this.props;
-        let { users, isFetching } = this.props;
+        const { search, selectUser, closeEditPage, error, role, isFetching } = this.props;
+        let { users } = this.props;
 
         if(error.length) {
             return <Alert alertMessage={ error } success={ false } />
         } else {
-            return (
-                <section id="pacients">
-                    <Search />
-                    <div className="table-wrap">
-                        <table className="pacients-table-content">
-                           <TableHead role={ role } />
-                           <TableBody search={ search } users={ users } isFetching={ isFetching } />
-                        </table>
-                        { selectUser != null ? <Edit close={() => closeEditPage(null) }/> : null }
-                        { editIsOpen ? <Edit close={ () => this.setState({ editIsOpen: false }) } /> : null }
-                    </div>
-                    <div className="add-btn-wrap"> 
-                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                    </div>
-                </section>
-            )
+            if(isFetching) {
+                return <Preloader />
+            } else {
+                return (
+                    <section id="pacients">
+                        <Search />
+                        <div className="table-wrap">
+                            <table className="pacients-table-content">
+                               <TableHead role={ role } />
+                               <TableBody search={ search } users={ users } isFetching={ isFetching } />
+                            </table>
+                            { selectUser != null ? <Edit close={() => closeEditPage(null) }/> : null }
+                            { editIsOpen ? <Edit close={ () => this.setState({ editIsOpen: false }) } /> : null }
+                        </div>
+                        <div className="add-btn-wrap"> 
+                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                        </div>
+                    </section>
+                )
+            }
+            
         }
     }
 }

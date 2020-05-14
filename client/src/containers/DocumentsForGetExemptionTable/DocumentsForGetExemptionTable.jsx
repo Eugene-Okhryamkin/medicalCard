@@ -3,6 +3,7 @@ import { DocumentsForGetExemptionTableHeader } from "./DocumentsForGetExemptionT
 import DocumentsForGetExemptionTableBody from "./DocumentsForGetExemptionTableBody/DocumentsForGetExemptionTableBody.jsx";
 import { connect } from "react-redux";
 import { getDocuments } from "../../actions/getDocumentForGetExemptionAction";
+import { Preloader } from "../../components/Preloader/Preloader.jsx";
 import propTypes from "prop-types";
 import "./DocumentsForGetExemptionTable.sass";
 
@@ -22,13 +23,19 @@ class DocumentsForGetExemptionTable extends Component {
     }
 
     render() {
-        const { documents, userRole } = this.props;
-        return (
-            <table>
-                <DocumentsForGetExemptionTableHeader userRole={ userRole } />
-                <DocumentsForGetExemptionTableBody documents={ documents } userRole={ userRole } />
-            </table>
-        )
+        const { documents, userRole, isFetching } = this.props;
+        if(isFetching) {
+            return <Preloader />
+        } else {
+            return (
+                <table>
+                    <DocumentsForGetExemptionTableHeader userRole={ userRole } />
+                    <DocumentsForGetExemptionTableBody documents={ documents } userRole={ userRole } />
+                </table>
+            )
+        }
+
+        
     }
 }
 
@@ -37,7 +44,8 @@ const mapStateToProps = state => ({
     userRole: state.auth.user.role,
     addDocument: state.addDocument.document,
     deleteDocument: state.deleteDocument.document,
-    selectUser: state.selectUser.selectedUser
+    selectUser: state.selectUser.selectedUser,
+    isFetching: state.getDocuments.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -50,7 +58,8 @@ DocumentsForGetExemptionTable.propTypes = {
     userRole: propTypes.string,
     addDocument: propTypes.object,
     deleteDocument: propTypes.string,
-    selectUser: propTypes.object
+    selectUser: propTypes.object,
+    isFetching: propTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentsForGetExemptionTable);

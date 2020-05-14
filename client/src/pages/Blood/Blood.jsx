@@ -9,6 +9,8 @@ import { getAnalisys } from "../../actions/getAnalisysAction";
 import { updateAnalisys } from "../../actions/updateAnalisysAction";
 import { deleteAnalisys } from "../../actions/deleteAnalisysAction";
 import { selectUser } from "../../actions/selectToManageUser.js";
+import { Preloader } from "../../components/Preloader/Preloader.jsx";
+import Alert from "../../components/Alert/Alert.jsx";
 
 import "./Blood.sass";
 
@@ -39,22 +41,30 @@ class Blood extends Component {
     }
 
     render() {
-        const { analisys, selectedUser, selectUser } = this.props;
+        const { analisys, selectedUser, selectUser, error, isFetching } = this.props;
         const { editIsOpen } = this.state;
 
-        return (
-            <section className="analisys">
-                <Search />
-                <div className="table-wrap">
-                    <BloodAnalisysTable data={analisys} deleteData={data => this.deleteData(data)} url="/api/blood/get" />
-                    {selectedUser != null ? <EditAnalisys update={data => this.updateData(data)} close={() => selectUser(null)} /> : null}
-                    {editIsOpen ? <EditAnalisys send={data => this.sendData(data)} close={() => this.setState({ editIsOpen: false })} /> : null}
-                </div>
-                <div className="add-btn-wrap">
-                    <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                </div>
-            </section>
-        )
+        if(error.length) {
+            return <Alert alertMessage={ error } success={ false } />
+        } else {
+            if(isFetching) {
+                return <Preloader />
+            } else {
+                return (
+                    <section className="analisys">
+                        <Search />
+                        <div className="table-wrap">
+                            <BloodAnalisysTable data={analisys} deleteData={data => this.deleteData(data)} url="/api/blood/get" />
+                            {selectedUser != null ? <EditAnalisys update={data => this.updateData(data)} close={() => selectUser(null)} /> : null}
+                            {editIsOpen ? <EditAnalisys send={data => this.sendData(data)} close={() => this.setState({ editIsOpen: false })} /> : null}
+                        </div>
+                        <div className="add-btn-wrap">
+                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                        </div>
+                    </section>
+                )
+            }
+        }
     }
 }
 
@@ -62,7 +72,9 @@ class Blood extends Component {
 const mapStateToProps = state => ({
     analisys: state.getAnalisys.analisys,
     addAnalisys: state.addAnalisys.analisys,
-    selectedUser: state.selectUser.selectedUser
+    selectedUser: state.selectUser.selectedUser,
+    error: state.getUsers.error,
+    isFetching: state.getAnalisys.isFetching
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -81,7 +93,9 @@ Blood.propTypes = {
     addAnalisys: propTypes.func,
     updateAnalisys: propTypes.func,
     deleteAnalisys: propTypes.func,
-    addAnalis: propTypes.array
+    addAnalis: propTypes.array,
+    error: propTypes.string,
+    isFetching: propTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Blood);

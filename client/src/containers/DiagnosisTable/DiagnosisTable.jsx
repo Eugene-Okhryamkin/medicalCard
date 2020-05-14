@@ -3,6 +3,7 @@ import { DiagnosisTableHeader } from "./DiagnosisTableHeader/DiagnosisTableHeade
 import DiagnosisTableBody from "./DiagnosisTableBody/DiagnosisTableBody.jsx";
 import { connect } from "react-redux";
 import { getDiagnosis } from "../../actions/getDiagnosis";
+import { Preloader } from "../../components/Preloader/Preloader.jsx";
 import propTypes from "prop-types";
 import "./DiagnosisTable.sass";
 
@@ -20,14 +21,20 @@ class DiagnosisTable extends Component {
     }
 
     render() {
-        const { diagnosis, userRole } = this.props;
+        const { diagnosis, userRole, isFetching } = this.props;
 
-        return (
-            <table>
-                <DiagnosisTableHeader userRole={ userRole } />    
-                <DiagnosisTableBody diagnosis={ diagnosis } userRole={ userRole } />
-            </table>
-        )
+        if(isFetching) { 
+            return <Preloader />
+        } else {
+            return (
+                <table>
+                    <DiagnosisTableHeader userRole={ userRole } />    
+                    <DiagnosisTableBody diagnosis={ diagnosis } userRole={ userRole } />
+                </table>
+            )
+        }
+
+        
     }
 }
 
@@ -36,7 +43,8 @@ const mapStateToProps = state => ({
     userRole: state.auth.user.role,
     selectUser: state.selectUser.selectedUser,
     addDiagnosis: state.addDiagnosis.diagnosis,
-    deleteDiagnosis: state.deleteDiagnosis.diagnosis
+    deleteDiagnosis: state.deleteDiagnosis.diagnosis,
+    isFetching: state.getDiagnosis.isFetching
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -49,7 +57,8 @@ DiagnosisTable.propTypes = {
     userRole: propTypes.string,
     selectUser: propTypes.string,
     addDiagnosis: propTypes.object,
-    deleteDiagnosis: propTypes.string
+    deleteDiagnosis: propTypes.string,
+    isFetching: propTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DiagnosisTable);

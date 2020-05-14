@@ -7,6 +7,7 @@ import propTypes from "prop-types";
 import { selectUser } from "../../actions/selectToManageUser";
 import "./DocumentsForGetExemption.sass";
 import { getDocuments } from "../../actions/getDocumentForGetExemptionAction.js";
+import Alert from "../../components/Alert/Alert.jsx";
 
 class DocumentsForGetExemption extends Component {
     state = {
@@ -20,28 +21,34 @@ class DocumentsForGetExemption extends Component {
 
     render() {
         const { editIsOpen } = this.state;
-        const { selectUser, closeEditPage } = this.props;
+        const { selectUser, closeEditPage, error } = this.props;
 
-        return (
-            <section id="DocumentForGetExemption">
-                <Search />
-                <div className="table-wrap">
-                    <DocumentForGetExemptionTable />
-                    { selectUser != null ? <DocumentEdit close={() => closeEditPage(null) }/> : null }
-                    { editIsOpen ? <DocumentEdit close={ () => this.setState({ editIsOpen: false }) } /> : null }
-                </div>
-                
-                <div className="add-btn-wrap">
-                    <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                </div>
-            </section>
-        )
+        if(error.length) {
+            return <Alert alertMessage={ error } success={ false } />
+        } else {
+            return (
+                <section id="DocumentForGetExemption">
+                    <Search />
+                    <div className="table-wrap">
+                        <DocumentForGetExemptionTable />
+                        { selectUser != null ? <DocumentEdit close={() => closeEditPage(null) }/> : null }
+                        { editIsOpen ? <DocumentEdit close={ () => this.setState({ editIsOpen: false }) } /> : null }
+                    </div>
+                    
+                    <div className="add-btn-wrap">
+                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                    </div>
+                </section>
+            )
+        }
+        
     }
 }
 
 const mapStateToProps = state => ({
     selectUser: state.selectUser.selectedUser,
-    documents: state.getDocuments.documents
+    documents: state.getDocuments.documents,
+    error: state.getUsers.error
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -53,7 +60,8 @@ DocumentsForGetExemption.propTypes = {
     selectUser: propTypes.object,
     closeEditPage: propTypes.func,
     getDocuments: propTypes.func,
-    documents: propTypes.array
+    documents: propTypes.array,
+    error: propTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentsForGetExemption);

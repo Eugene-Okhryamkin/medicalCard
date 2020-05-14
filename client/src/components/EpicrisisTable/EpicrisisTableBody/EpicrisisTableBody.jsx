@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Preloader } from "../../Preloader/Preloader.jsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
@@ -15,40 +14,36 @@ class EpicrisisTableBody extends Component {
     }
 
     renderPacients = () => {
-        let { epicrisisData, isFetching } = this.props;
+        let { epicrisisData } = this.props;
         const { search } = this.props;
         let template = null;
 
-        if(isFetching) {
-            return (
-                <Preloader />
-            )
-        } else {
-            if(epicrisisData) {
 
-                if (search.length) {
-                    epicrisisData = epicrisisData.filter(item => item.Surname.toLowerCase().includes(search.toLowerCase()))
-                }
-                template = epicrisisData.map((item) => {
-                    if(item.Epicrisis != null) {
-                        return (
-                            <tr key={item.Epicrisis.idEpicrisis}>
-                                <td className="manageButton"><FontAwesomeIcon icon={ faDownload } onClick={() => this.download(item.Epicrisis.idEpicrisis)} /></td>
-                                <td>{item.Epicrisis.Date}</td>
-                                <td>{item.Surname}</td>
-                                <td>{item.Name}</td>
-                                <td>{item.MiddleName}</td>
-                                <td>{item.Epicrisis.User.Surname} {item.Epicrisis.User.Name} {item.Epicrisis.User.MiddleName}</td>
-                            </tr>
-                        )
-                    }
-                    
-                });
-    
-                return template;
+        if (epicrisisData) {
+
+            if (search.length) {
+                epicrisisData = epicrisisData.filter(item => item.Surname.toLowerCase().includes(search.toLowerCase()))
             }
-    
+            template = epicrisisData.map((item) => {
+                if (item.Epicrisis != null) {
+                    return (
+                        <tr key={item.Epicrisis.idEpicrisis}>
+                            <td className="manageButton"><FontAwesomeIcon icon={faDownload} onClick={() => this.download(item.Epicrisis.idEpicrisis)} /></td>
+                            <td>{item.Epicrisis.Date}</td>
+                            <td>{item.Surname}</td>
+                            <td>{item.Name}</td>
+                            <td>{item.MiddleName}</td>
+                            <td>{item.Epicrisis.User.Surname} {item.Epicrisis.User.Name} {item.Epicrisis.User.MiddleName}</td>
+                        </tr>
+                    )
+                }
+
+            });
+
+            return template;
         }
+
+
     }
 
     render() {
@@ -70,7 +65,6 @@ const mapDispatchToProps = dispatch => ({
 
 EpicrisisTableBody.propTypes = {
     epicrisisData: propTypes.array,
-    isFetching: propTypes.bool,
     download: propTypes.func,
     search: propTypes.string
 }
