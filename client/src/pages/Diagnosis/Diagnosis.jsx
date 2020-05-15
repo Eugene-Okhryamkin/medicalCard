@@ -21,24 +21,30 @@ class Diagnosis extends Component {
 
     render() {
         const { editIsOpen } = this.state;
-        const { selectedUser, selectUser, error } = this.props;
+        const { selectedUser, selectUser, error, user } = this.props;
 
         if (error.length) {
             return <Alert alertMessage={error} success={false} />
         } else {
-            return (
-                <section id="Diagnosis">
-                    <Search />
-                    <div className="table-wrap">
-                        <DiagnosisTable />
-                        {selectedUser != null ? <DiagnosisEdit close={() => selectUser(null)} /> : null}
-                        {editIsOpen ? <DiagnosisEdit close={() => this.setState({ editIsOpen: false })} /> : null}
-                    </div>
-                    <div className="add-btn-wrap">
-                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                    </div>
-                </section>
-            )
+            if(user != null) {
+                return (
+                    <section id="Diagnosis">
+                        <Search />
+                        <div className="table-wrap">
+                            <DiagnosisTable />
+                            {selectedUser != null ? <DiagnosisEdit close={() => selectUser(null)} /> : null}
+                            {editIsOpen ? <DiagnosisEdit close={() => this.setState({ editIsOpen: false })} /> : null}
+                        </div>
+                        {
+                            user.role != "TechnikalDoctor" ? 
+                            <div className="add-btn-wrap">
+                                <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                            </div> : null
+                        }
+                        
+                    </section>
+                )
+            }
 
         }
     }
@@ -48,6 +54,7 @@ const mapStateToProps = state => ({
     selectedUser: state.selectUser.selectedUser,
     diagnosis: state.getDiagnosis.diagnosis,
     error: state.getUsers.error,
+    user: state.auth.user
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -60,7 +67,8 @@ Diagnosis.propTypes = {
     diagnosis: propTypes.array,
     getDiagnosis: propTypes.func,
     selectUser: propTypes.func,
-    error: propTypes.string
+    error: propTypes.string,
+    user: propTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Diagnosis);

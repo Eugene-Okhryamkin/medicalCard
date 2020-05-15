@@ -15,33 +15,42 @@ class Epicrisis extends Component {
 
     render() {
         const { uploadWindowIsOpen } = this.state;
-        const { error } = this.props;
+        const { error, user } = this.props;
         
         if(error.length) {
             return (
                 <Alert alertMessage={ error } success={ false } />
             )
         } else {
-            return (
-                <section id="Epicrisis">
-                    { uploadWindowIsOpen ? <Upload close={() => this.setState({ uploadWindowIsOpen: false })} /> : null }
-                    <Search />
-                    <EpicrisisTable />
-                    <div id="upload-btn">
-                        <button onClick={() => this.setState({ uploadWindowIsOpen: true })}>Загрузить</button>
-                    </div>
-                </section>
-            )
+            if(user != null) {
+                return (
+                    <section id="Epicrisis">
+                        { uploadWindowIsOpen ? <Upload close={() => this.setState({ uploadWindowIsOpen: false })} /> : null }
+                        <Search />
+                        <EpicrisisTable />
+                        {
+                            user.role != "TechnikalDoctor" ?  
+                            <div id="upload-btn">
+                                <button onClick={() => this.setState({ uploadWindowIsOpen: true })}>Загрузить</button>
+                            </div> : null
+                        }
+                       
+                    </section>
+                )
+            }
+            
         }
     }
 }
 
 const mapStateToProps = state => ({
-    error: state.getEpicrisis.error
+    error: state.getEpicrisis.error,
+    user: state.auth.user
 })
 
 Epicrisis.propTypes = {
-    error: propTypes.string
+    error: propTypes.string,
+    user: propTypes.object
 }
 
 export default connect(mapStateToProps, null)(Epicrisis);

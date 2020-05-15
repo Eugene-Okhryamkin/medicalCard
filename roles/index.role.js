@@ -4,6 +4,6 @@ module.exports = (
     roles.createNewRole("Admin"),
     roles.createNewRole("Pacient"),
     roles.createNewRole("Doctor"),
-    roles.createNewRole("technikalDoctor")
+    roles.createNewRole("TechnikalDoctor")
 )
 

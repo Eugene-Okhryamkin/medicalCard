@@ -48,10 +48,13 @@ exports.getUsers = async (req, res) => {
         const decodedToken = decodeAuthorization(req.headers.authorization)
         const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/get", "GET");
 
+        console.log(decodedToken.role)
+
         if(val) {
             User.findAll()
-            .then(users => res.send(users).json())
+            .then(users => res.status(200).json(users))
             .catch(err => res.sendStatus(500).json())
+
         } else {
             res.status(403).json({ error: "Запрещено" })
         }

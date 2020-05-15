@@ -51,7 +51,7 @@ class Sidebar extends Component {
                         </>
                     );
 
-                case "technikalDoctor": 
+                case "TechnikalDoctor": 
                     return (
                         <>
                             <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>

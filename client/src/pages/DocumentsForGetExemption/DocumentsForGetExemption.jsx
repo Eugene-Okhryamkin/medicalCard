@@ -21,7 +21,7 @@ class DocumentsForGetExemption extends Component {
 
     render() {
         const { editIsOpen } = this.state;
-        const { selectUser, closeEditPage, error } = this.props;
+        const { selectUser, closeEditPage, error, role } = this.props;
 
         if(error.length) {
             return <Alert alertMessage={ error } success={ false } />
@@ -34,10 +34,14 @@ class DocumentsForGetExemption extends Component {
                         { selectUser != null ? <DocumentEdit close={() => closeEditPage(null) }/> : null }
                         { editIsOpen ? <DocumentEdit close={ () => this.setState({ editIsOpen: false }) } /> : null }
                     </div>
+                    {
+                        role == "Admin" ?
+                        <div className="add-btn-wrap">
+                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                        </div> : null
+                        
+                    }
                     
-                    <div className="add-btn-wrap">
-                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                    </div>
                 </section>
             )
         }
@@ -48,7 +52,8 @@ class DocumentsForGetExemption extends Component {
 const mapStateToProps = state => ({
     selectUser: state.selectUser.selectedUser,
     documents: state.getDocuments.documents,
-    error: state.getUsers.error
+    error: state.getUsers.error,
+    role: state.auth.user.role
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -61,7 +66,8 @@ DocumentsForGetExemption.propTypes = {
     closeEditPage: propTypes.func,
     getDocuments: propTypes.func,
     documents: propTypes.array,
-    error: propTypes.string
+    error: propTypes.string,
+    role: propTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DocumentsForGetExemption);
