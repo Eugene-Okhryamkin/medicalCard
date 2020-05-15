@@ -1,3 +1,5 @@
+const path = require("path");
+
 exports.index = (req, res) => {
-    res.json({ message: "API" });
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
 }

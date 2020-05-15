@@ -2,6 +2,6 @@ const express = require("express");
 const homeController = require("../controllers/home.controller");
 const homeRouter = express.Router();
 
-homeRouter.get("/api", homeController.index);
+homeRouter.get("*", homeController.index);
 
 module.exports = homeRouter;

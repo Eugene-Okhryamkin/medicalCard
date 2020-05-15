@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const db = require("./config/database");
+const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
@@ -37,7 +38,12 @@ app.use("/api/xray", xrayRouter);
 app.use("/api/fluorography", fluorographyRouter);
 app.use("/api/blood", bloodRouter);
 app.use("/api/urine", urineRouter);
-app.use("/api/stool", stoolRouter)
-app.use("/", homeRouter);
+app.use("/api/stool", stoolRouter);
+
+if(process.env.NODE_ENV === "production") {
+    app.use("/", express.static(path.resolve(__dirname, "client", "build")))
+    app.use("*", homeRouter);
+};
+
 
 app.listen(PORT, () => console.log(`Server running at ${PORT}`));
