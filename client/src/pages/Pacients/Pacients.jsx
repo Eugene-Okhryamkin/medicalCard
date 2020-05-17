@@ -54,7 +54,7 @@ class Pacients extends Component {
                         {
                             role == "Admin" ? 
                             <div className="add-btn-wrap"> 
-                            <   button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
                             </div> : null
                         }
                         

@@ -1,0 +1,42 @@
+version: '3'
+
+services: 
+  db:
+    image: mysql
+    container_name: sql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: qwe123
+      MYSQL_DATABASE: med
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  app:
+    build: ./
+    container_name: app
+    environment: 
+      - DB=med
+      - HOST=db
+      - USER=root
+      - PASSWORD=qwe123
+    ports: 
+      - 3000:3000
+    links: 
+      - db
+
+  nginx:
+    image: nginx
+    container_name: NGINX
+    restart: always
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf/nginx.conf
+    ports:
+      - 80:80
+    links: 
+      - app
+    

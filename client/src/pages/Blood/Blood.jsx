@@ -41,7 +41,7 @@ class Blood extends Component {
     }
 
     render() {
-        const { analisys, selectedUser, selectUser, error, isFetching } = this.props;
+        const { analisys, selectedUser, selectUser, error, isFetching, role } = this.props;
         const { editIsOpen } = this.state;
 
         if(error.length) {
@@ -58,9 +58,16 @@ class Blood extends Component {
                             {selectedUser != null ? <EditAnalisys update={data => this.updateData(data)} close={() => selectUser(null)} /> : null}
                             {editIsOpen ? <EditAnalisys send={data => this.sendData(data)} close={() => this.setState({ editIsOpen: false })} /> : null}
                         </div>
-                        <div className="add-btn-wrap">
-                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                        </div>
+
+                        {
+                            role != "MiddleMed" ? 
+                            <div className="add-btn-wrap">
+                                <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                            </div> : null
+
+                        }
+
+                        
                     </section>
                 )
             }
@@ -74,7 +81,8 @@ const mapStateToProps = state => ({
     addAnalisys: state.addAnalisys.analisys,
     selectedUser: state.selectUser.selectedUser,
     error: state.getUsers.error,
-    isFetching: state.getAnalisys.isFetching
+    isFetching: state.getAnalisys.isFetching,
+    role: state.auth.user.role
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -95,7 +103,8 @@ Blood.propTypes = {
     deleteAnalisys: propTypes.func,
     addAnalis: propTypes.array,
     error: propTypes.string,
-    isFetching: propTypes.bool
+    isFetching: propTypes.bool,
+    role: propTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Blood);

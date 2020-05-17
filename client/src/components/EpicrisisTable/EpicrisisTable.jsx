@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-import { EpicrisisTableHeader } from "./EpicrisisTableHeader/EpicrisisTableHeader.jsx";
+import EpicrisisTableHeader from "./EpicrisisTableHeader/EpicrisisTableHeader.jsx";
 import EpicrisisTableBody  from "./EpicrisisTableBody/EpicrisisTableBody.jsx";
 import { connect } from "react-redux";
 import { Preloader } from "../../components/Preloader/Preloader.jsx";
@@ -15,8 +15,9 @@ class EpicrisisTable extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        const { getEpicrisis, uploadEpicrisis } = this.props;
-        prevProps.uploadEpicrisis != uploadEpicrisis ? getEpicrisis("/api/epicrisis/get") : uploadEpicrisis
+        const { getEpicrisis, uploadEpicrisis, deleteEpicrisis } = this.props;
+        prevProps.uploadEpicrisis != uploadEpicrisis ? getEpicrisis("/api/epicrisis/get") : uploadEpicrisis,
+        prevProps.deleteEpicrisis != deleteEpicrisis ? getEpicrisis("/api/epicrisis/get") : deleteEpicrisis
     }
 
     render() {
@@ -40,6 +41,7 @@ class EpicrisisTable extends Component {
 const mapStateToProps = state => ({
     epicrisis: state.getEpicrisis.epicrisis,
     uploadEpicrisis: state.uploadEpicrisis.epicrisis,
+    deleteEpicrisis: state.deleteEpicrisis.epicrisis,
     isFetching: state.getEpicrisis.isFetching
 });
 
@@ -51,7 +53,8 @@ EpicrisisTable.propTypes = {
     epicrisis: propTypes.array,
     isFetching: propTypes.bool,
     getEpicrisis: propTypes.func,
-    uploadEpicrisis: propTypes.object
+    uploadEpicrisis: propTypes.object,
+    deleteEpicrisis: propTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(EpicrisisTable);

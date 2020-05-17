@@ -9,5 +9,6 @@ epicrisisRouter.post("/upload", multer({storage: storageConfigForEpicrisis}).sin
 epicrisisRouter.get("/get", epicrisisController.getAllEpicrisis)
 epicrisisRouter.get("/concrete", epicrisisController.getConcreteEpicrisis)
 epicrisisRouter.post("/download", epicrisisController.downloadEpicrisis)
+epicrisisRouter.post("/delete", epicrisisController.deleteEpicrisis)
 
 module.exports = epicrisisRouter;

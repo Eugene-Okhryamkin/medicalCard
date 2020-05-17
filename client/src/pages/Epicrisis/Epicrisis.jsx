@@ -29,7 +29,7 @@ class Epicrisis extends Component {
                         <Search />
                         <EpicrisisTable />
                         {
-                            user.role != "TechnikalDoctor" ?  
+                            user.role != ("TechnikalDoctor" && "MiddleMed") ?  
                             <div id="upload-btn">
                                 <button onClick={() => this.setState({ uploadWindowIsOpen: true })}>Загрузить</button>
                             </div> : null

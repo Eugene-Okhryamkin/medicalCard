@@ -1,5 +1,5 @@
-const Fluorography = require("../models/Fluorography.model").Fluorography;
-const User = require("../models/user.model").User;
+const Fluorography = require("../models/fluorography.model.js").Fluorography;
+const User = require("../models/user.model.js").User;
 const decode = require("jwt-decode");
 const db = require("../config/database");
 const roles = require("user-groups-roles");

@@ -36,7 +36,7 @@ class Diagnosis extends Component {
                             {editIsOpen ? <DiagnosisEdit close={() => this.setState({ editIsOpen: false })} /> : null}
                         </div>
                         {
-                            user.role != "TechnikalDoctor" ? 
+                            user.role != ("TechnikalDoctor" && "MiddleMed") ? 
                             <div className="add-btn-wrap">
                                 <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
                             </div> : null

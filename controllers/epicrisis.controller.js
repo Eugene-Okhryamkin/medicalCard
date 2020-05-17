@@ -4,6 +4,7 @@ const decode = require("jwt-decode");
 const epicrisisRole = require("../roles/epicrisis.role");
 const roles = require("user-groups-roles");
 const getDate = require("../utils/getDate");
+const fs = require("fs");
 
 const decodeAuthorization = authorization => decode(authorization);
 
@@ -138,3 +139,36 @@ exports.downloadEpicrisis = async (req, res) => {
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
     }
 };
+
+exports.deleteEpicrisis = async (req, res) => {
+    try {
+        const decodedToken = await decodeAuthorization(req.headers.authorization);
+        const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/delete", "POST");
+
+        const { id } = req.body;
+
+        if(val) {
+            const epicrisis = await Epicrisis.findOne({
+                where: { idEpicrisis: id }
+            })
+    
+
+            if(epicrisis) {
+                fs.unlinkSync(epicrisis.LinkToFile);
+                Epicrisis.destroy({
+                    where: {
+                        idEpicrisis: id
+                    }
+                })
+            }
+
+            return res.status(200).json({ message: "Удалено" });
+        } else {
+            return res.status(403).json({ error: "Запрещено" })
+        }
+
+    } catch(err) {
+        console.error(err);
+        res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
+    } 
+}

@@ -39,7 +39,7 @@ class Fluorography extends Component {
 
 
     render() {
-        const { analisys, selectUser, selectedUser, error } = this.props;
+        const { analisys, selectUser, selectedUser, error, role } = this.props;
         const { editIsOpen } = this.state;
 
         if(error.length) {
@@ -52,9 +52,13 @@ class Fluorography extends Component {
                         { selectedUser != null ? <EditAnalisys update={ data => this.updateData(data) } close={() => selectUser(null) }/> : null }
                         { editIsOpen ? <EditAnalisys send={ data => this.sendData(data) } close={ () => this.setState({ editIsOpen: false }) } /> : null }
                     </div>
-                    <div className="add-btn-wrap">
-                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                    </div>
+                    {
+                        role != "MiddleMed" ? 
+                        <div className="add-btn-wrap">
+                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                        </div> : null
+
+                    }
                 </section>
     
             )
@@ -67,6 +71,7 @@ const mapStateToProps = state => ({
     addAnalisys: state.addAnalisys.analisys,
     selectedUser: state.selectUser.selectedUser,
     error: state.getUsers.error,
+    role: state.auth.user.role
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -87,6 +92,7 @@ Fluorography.propTypes = {
     deleteAnalisys: propTypes.func,
     addAnalis: propTypes.array,
     error: propTypes.string,
+    role: propTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Fluorography);

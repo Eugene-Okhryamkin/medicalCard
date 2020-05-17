@@ -45,7 +45,7 @@ class XRay extends Component {
     }
 
     render() {
-        const { analisys, selectedUser, selectUser, error } = this.props;
+        const { analisys, selectedUser, selectUser, error, role } = this.props;
         const { editIsOpen } = this.state;
         
         if(error.length) {
@@ -59,9 +59,13 @@ class XRay extends Component {
                         { selectedUser != null ? <EditAnalisys update={ data => this.updateData(data) } close={() => selectUser(null) }/> : null }
                         { editIsOpen ? <EditAnalisys send={ data => this.sendData(data) } close={ () => this.setState({ editIsOpen: false }) } /> : null }
                     </div>
-                    <div className="add-btn-wrap">
-                        <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
-                    </div>
+                    {
+                        role != "MiddleMed" ? 
+                        <div className="add-btn-wrap">
+                            <button className="add-btn" onClick={() => this.setState({ editIsOpen: true })}>добавить</button>
+                        </div> : null
+
+                    }
                 </section>
             )
         }
@@ -73,7 +77,8 @@ const mapStateToProps = state => ({
     analisys: state.getAnalisys.analisys,
     addAnalisys: state.addAnalisys.analisys,
     selectedUser: state.selectUser.selectedUser,
-    error: state.getUsers.error
+    error: state.getUsers.error,
+    role: state.auth.user.role
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -93,7 +98,8 @@ XRay.propTypes = {
     updateAnalisys: propTypes.func,
     deleteAnalisys: propTypes.func,
     addAnalis: propTypes.array,
-    error: propTypes.string
+    error: propTypes.string,
+    role: propTypes.string
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(XRay);

@@ -20,6 +20,7 @@ import { getAnalisys } from "./getAnalisysReducer";
 import { addAnalisys } from "./addAnalisysReducer";
 import { updateAnalisys } from "./updateAnalisysReducer";
 import { deleteAnalisys } from "./deleteAnalisysReducer";
+import { deleteEpicrisis } from "./deleteEpicrisisReducer";
 
 export const rootReducer = combineReducers({
     toggleMenu: toggleMenu,
@@ -42,5 +43,6 @@ export const rootReducer = combineReducers({
     getAnalisys: getAnalisys,
     addAnalisys: addAnalisys,
     updateAnalisys: updateAnalisys,
-    deleteAnalisys: deleteAnalisys
+    deleteAnalisys: deleteAnalisys,
+    deleteEpicrisis: deleteEpicrisis
 });

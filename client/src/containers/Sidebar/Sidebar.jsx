@@ -67,6 +67,22 @@ class Sidebar extends Component {
                         </>
                     ); 
 
+                case "MiddleMed": 
+                    return (
+                        <>
+                            <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>
+                            <li><NavLink to={"/pacients"} className="ListItem" >Пациенты</NavLink></li>
+                            <li><NavLink to={"/epicrisis"} className="ListItem" >Эпикризы</NavLink></li>
+                            <li><NavLink to={"/exemption"} className="ListItem">Льготы</NavLink></li>
+                            <li><NavLink to={"/diagnosis"} className="ListItem">Диагнозы</NavLink></li>
+                            <li><NavLink to={"/xray"} className="ListItem">Рентгены</NavLink></li>
+                            <li><NavLink to={"/fluorography"} className="ListItem">Флюорография</NavLink></li>
+                            <li><NavLink to={"/blood"} className="ListItem">Анализы крови</NavLink></li>
+                            <li><NavLink to={"/urine"} className="ListItem" >Анализы мочи</NavLink></li>
+                            <li><NavLink to={"/stool"} className="ListItem" >Анализы кала</NavLink></li>
+                        </>
+                    ); 
+
                 case "Pacient":
                     return(
                         <li><NavLink to={"/"} className="ListItem" >Главная страница</NavLink></li>

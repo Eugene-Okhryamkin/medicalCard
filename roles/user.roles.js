@@ -30,6 +30,12 @@ module.exports = (
     roles.addPrivilegeToRole("TechnikalDoctor", ["/add", "POST"], false),
     roles.addPrivilegeToRole("TechnikalDoctor", ["/login", "POST"], true),
     roles.addPrivilegeToRole("TechnikalDoctor", ["/get", "GET"], true),
-    roles.addPrivilegeToRole("TechnikalDoctor", ["/delete", "POST"], false)
+    roles.addPrivilegeToRole("TechnikalDoctor", ["/delete", "POST"], false),
+
+    roles.addPrivilegeToRole("MiddleMed", ["/update", "POST"], false),
+    roles.addPrivilegeToRole("MiddleMed", ["/add", "POST"], false),
+    roles.addPrivilegeToRole("MiddleMed", ["/login", "POST"], true),
+    roles.addPrivilegeToRole("MiddleMed", ["/get", "GET"], true),
+    roles.addPrivilegeToRole("MiddleMed", ["/delete", "POST"], false)
 )
 
