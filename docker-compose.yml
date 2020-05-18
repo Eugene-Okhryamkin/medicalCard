@@ -5,25 +5,30 @@ services:
     image: mysql
     container_name: sql
     restart: always
+    volumes: 
+      - ./sqldata:/docker-entrypoint-initdb.d
+    cap_add:
+      - SYS_NICE  #  CAP_SYS_NICE
     environment:
-      MYSQL_ROOT_PASSWORD: qwe123
-      MYSQL_DATABASE: med
+      MYSQL_ROOT_PASSWORD: 'pass'
+      MYSQL_DATABASE: 'med'
+      MYSQL_USER: 'user'
 
   adminer:
     image: adminer
     container_name: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 3306:3306
 
   app:
     build: ./
     container_name: app
     environment: 
-      - DB=med
+      - DB=db
       - HOST=db
-      - USER=root
-      - PASSWORD=qwe123
+      - USER=user
+      - PASSWORD=pass
     ports: 
       - 3000:3000
     links: 
@@ -34,7 +39,7 @@ services:
     container_name: NGINX
     restart: always
     volumes:
-      - ./default.conf:/etc/enginx/conf.d/default.conf
+      - ./default.conf:/etc/nginx/conf.d/default.conf
     ports:
       - 80:80
     links: 

@@ -50,6 +50,8 @@ class EditBlood extends Component {
                     <div className="mainData-inputs">
                         <input type="text" onChange={this.onHandleEdit} value={this.state.analisy.Date || ""} placeholder="Дата" name="Date" required />
                         <input type="text" onChange={this.onHandleEdit} value={this.state.analisy.Code || ""} placeholder="Код" name="Code" required />
+                        <input type="text" onChange={this.onHandleEdit} value={this.state.analisy.Group || ""} placeholder="Группа" name="Group" required />
+                        <input type="text" onChange={this.onHandleEdit} value={this.state.analisy.Rhesus || ""} placeholder="Резус" name="Rhesus" required />
                         <input type="text" onChange={this.onHandleEdit} value={this.state.Passport || ""} placeholder="Паспорт пациента" name="Passport" required />
                     </div>
                     <div id="submit" >

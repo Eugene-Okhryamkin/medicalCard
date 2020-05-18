@@ -3,16 +3,16 @@ import ReactDOM from 'react-dom';
 import App from "./containers/App.jsx";
 import { store } from "./store/store.js";
 import { Provider } from "react-redux";
-import { Router } from "react-router";
-import { createBrowserHistory } from "history";
+import { HashRouter } from "react-router-dom";
+//import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory();
+//const history = createBrowserHistory();
 
 ReactDOM.render(
     <Provider store={ store }>
-        <Router history={ history }>
+        <HashRouter>
             <App />
-        </Router>
+        </HashRouter>
     </Provider>,
     document.getElementById("root")
 )

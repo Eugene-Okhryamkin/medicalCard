@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import EditAnalisys from "../EditAnalisys/EditAnalisys.jsx";
+import EditBlood from "../EditBlood/EditBlood.jsx";
 import Search from "../../components/Search/Search.jsx";
 import BloodAnalisysTable from "../../containers/BloodAnalisysTable/BloodAnalisysTable.jsx";
 import { connect } from "react-redux";
@@ -55,8 +55,8 @@ class Blood extends Component {
                         <Search />
                         <div className="table-wrap">
                             <BloodAnalisysTable data={analisys} deleteData={data => this.deleteData(data)} url="/api/blood/get" />
-                            {selectedUser != null ? <EditAnalisys update={data => this.updateData(data)} close={() => selectUser(null)} /> : null}
-                            {editIsOpen ? <EditAnalisys send={data => this.sendData(data)} close={() => this.setState({ editIsOpen: false })} /> : null}
+                            {selectedUser != null ? <EditBlood update={data => this.updateData(data)} close={() => selectUser(null)} /> : null}
+                            {editIsOpen ? <EditBlood send={data => this.sendData(data)} close={() => this.setState({ editIsOpen: false })} /> : null}
                         </div>
 
                         {
