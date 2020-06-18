@@ -7,6 +7,7 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon index.js\" \"npm run dev --prefix client\" ",
     "client:build": "npm run build --prefix client",
+    "test": "jest",
     "startpm": "pm2 start npm -- start"
   },
   "repository": {
@@ -36,7 +37,9 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
+    "jest": "^26.0.1",
     "multer": "^1.4.2",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "supertest": "^4.0.2"
   }
 }

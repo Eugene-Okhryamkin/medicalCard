@@ -86,10 +86,10 @@ exports.updateBlood = async (req, res) => {
     try {
         const decodedToken = await decodeAuthorization(req.headers.authorization);
         const val = roles.getRoleRoutePrivilegeValue(decodedToken.role, "/update", "POST")
-        const { Code, Date, Passport } = req.body;
+        const { Code, Date, Passport, Group, Rhesus } = req.body;
         if(val) {
 
-            Blood.update({ Code, Date, Passport }, {
+            Blood.update({ Code, Date, Passport, Group, Rhesus}, {
                 where: { 
                     id: req.body.analisy.id 
                 }
