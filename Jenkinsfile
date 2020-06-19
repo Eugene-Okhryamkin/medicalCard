@@ -1,16 +1,18 @@
 pipeline {
-    agent any
+    agent {
+        label "master"
+    }
 
     stages {
-        stage("build") {
+        stage("test") {
             steps {
-                git commit
+                sh "npm run test"
             }
         }
 
-        stage("server side test") {
-            steps {
-                sh "npm run test"
+        stage("deliver") {
+            if(env.BRANCH_NAME == "master") {
+                echo "deliver"
             }
         }
     }
