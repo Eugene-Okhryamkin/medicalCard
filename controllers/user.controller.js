@@ -53,7 +53,7 @@ exports.getUsers = async (req, res) => {
         if(val) {
             User.findAll()
             .then(users => res.status(200).json(users))
-            .catch(err => res.sendStatus(500).json())
+            .catch(err => res.sendStatus(500).json(err))
 
         } else {
             res.status(403).json({ error: "Запрещено" })

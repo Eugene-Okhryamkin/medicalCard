@@ -34,7 +34,7 @@ services:
     container_name: JENKINS
     restart: always
     volumes:
-      - ./jenkins/jenkins_home:/var/jenkins_home
+      - ./:/var/jenkins_home/app
       - /var/run/docker.sock:/var/run/docker.sock
     privileged: true
     user: root
