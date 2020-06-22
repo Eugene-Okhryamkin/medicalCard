@@ -6,6 +6,8 @@ const path = require("path");
 
 const PORT = process.env.PORT || 3000;
 
+//check
+
 //Подключение базы данных
 db
     .authenticate()
