@@ -19,6 +19,8 @@ services:
   app:
     build: ./
     container_name: app
+    networks:
+      - jenkins
     environment: 
       - DB=med
       - HOST=db
@@ -34,7 +36,7 @@ services:
     container_name: JENKINS
     restart: always
     volumes:
-      - ./jenkins/jenkins_home:/var/jenkins_home
+      - ./:/var/jenkins_home/app/
     privileged: true
     user: root
     ports:
