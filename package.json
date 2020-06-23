@@ -19,6 +19,7 @@
   "bugs": {
     "url": "https://github.com/Eugene-Okhryamkin/medicalCard/issues"
   },
+  
   "homepage": "https://github.com/Eugene-Okhryamkin/medicalCard#readme",
   "dependencies": {
     "@casl/ability": "^4.0.6",
