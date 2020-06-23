@@ -42,7 +42,7 @@ services:
       - db
     environment:
       - DB=med
-      - HOST=db
+      - HOST=82.148.30.62:3306
       - USER=root
       - PASSWORD=qwe123
     ports:

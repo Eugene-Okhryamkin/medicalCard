@@ -1,7 +1,7 @@
 const request = require("supertest");
 const userRouter = require("../../../routes/user.router");
 
-describe("add user tests", () => {
+describe("auth user tests", () => {
     test("auth user success", done => {
         const inputData = [{ SNILS: "116-973-385 89", Password: "asdf" }];
         const json = JSON.stringify(inputData);
