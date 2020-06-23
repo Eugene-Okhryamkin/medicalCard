@@ -147,7 +147,7 @@ exports.authUser = async (req, res) => {
 
         const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
         
-        res.json({ token });
+        res.status(200).json({ token });
 
     } catch(err) {
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
