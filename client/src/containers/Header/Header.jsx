@@ -17,6 +17,7 @@ class Header extends Component {
 
     render() {
         const { username, menuState } = this.props;
+        console.log("jenkins");
 
         if(username != null) {
             return (
