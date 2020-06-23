@@ -38,6 +38,13 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     privileged: true
     user: root
+    links:
+      - db
+    environment:
+      - DB=med
+      - HOST=db
+      - USER=root
+      - PASSWORD=qwe123
     ports:
       - 8080:8080
 
