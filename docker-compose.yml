@@ -17,7 +17,7 @@ services:
       MYSQL_USER: 'root'
 
   app:
-    build: ./
+    build: ./jenkins/
     container_name: app
     environment: 
       - DB=med
@@ -34,7 +34,7 @@ services:
     container_name: JENKINS
     restart: always
     volumes:
-      - ./:/var/jenkins_home/app
+      - ./jenkins:/var/jenkins_home/app
       - /var/run/docker.sock:/var/run/docker.sock
     privileged: true
     user: root
@@ -51,7 +51,6 @@ services:
       - 8000:8000
       - 80:80
     links:
-      - adminer
       - app
       - db
       - jenkins
