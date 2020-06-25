@@ -1,8 +1,7 @@
 const request = require("supertest");
-const userRouter = require("../../../routes/user.router");
-const app = require("../../../index");
+const app = require("../../../app");
 
-describe("auth user test", () => {
+describe("auth user tests", () => {
     test("auth successful", done => {
         const data = { SNILS: "116-973-385 89", Password: "asdf" };
         const json = JSON.stringify(data);
@@ -13,7 +12,7 @@ describe("auth user test", () => {
             .send(json)
             .then(res => {
                 expect(res.status).toBe(200);
-                expect(res.body).toHaveProperty("token")
+                expect(res.body).toHaveProperty("token");
                 done();
             });
     });
@@ -48,8 +47,8 @@ describe("auth user test", () => {
             });
     });
 
-});
 
+});
 
 
 

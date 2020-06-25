@@ -34,7 +34,7 @@ exports.addUser = async (req, res) => {
     
             return res.status(201).json({ message: "Пациент успешно зарегистрирован" });
         } else {
-            return res.json({ error: "Запрещено" })
+            return res.status(403).json({ error: "Запрещено" })
         }
 
     } catch(err) {
@@ -148,11 +148,10 @@ exports.authUser = async (req, res) => {
         const token = jwt.sign(payload, config.jwtSecret, { expiresIn: "1h" });
         
         res.status(200).json({ token });
-
     } catch(err) {
         res.status(500).json({ error: "Что-то пошло не так, попробуйте снова" });
     }
-    
+
 
 };
 
