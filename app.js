@@ -4,8 +4,6 @@ const cors = require("cors");
 const db = require("./config/database");
 const path = require("path");
 
-const PORT = process.env.PORT || 3000;
-
 //check
 
 //Подключение базы данных
@@ -48,4 +46,4 @@ if(process.env.NODE_ENV === "production") {
 };
 
 
-app.listen(PORT, () => console.log(`Server running at ${PORT}`));
+module.exports = app;
