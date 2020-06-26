@@ -34,31 +34,38 @@ function pacientAuth(done) {
         })
 };
 
-describe("get users test", () => {
+const id = 5;
 
+const json = JSON.stringify({ id });
+
+describe("delete user tests", () => {
     beforeEach(done => {
         adminAuth(done);
         pacientAuth(done);
     });
 
-    test("get users success", done => {
+    test("delete user success", done => {
         return request(app)
-            .get("/api/users/get")
+            .post("/api/users/delete")
             .set("Content-Type", "application/json")
             .set("Authorization", tokens.adminToken)
+            .send(json)
             .then(res => {
                 expect(res.status).toBe(200);
+                expect(res.hasOwnProperty("message"));
                 done();
             });
     });
 
-    test("get users failed: access denied", done => {
+    test("delete user failed: access denied", done => {
         return request(app)
-            .get("/api/users/get")
+            .post("/api/users/delete")
             .set("Content-Type", "application/json")
             .set("Authorization", tokens.pacientToken)
+            .send(json)
             .then(res => {
-                expect(res.status).toBe(403)
+                expect(res.status).toBe(403);
+                expect(res.hasOwnProperty("error"));
                 done();
             });
     });

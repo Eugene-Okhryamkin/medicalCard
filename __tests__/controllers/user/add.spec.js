@@ -34,7 +34,7 @@ function pacientAuth(done) {
         })
 };
 
-const user = {
+const definedUser = {
     OMC: "000000000000",
     CodeOfExemption: "00000000000000ion",
     SNILS: "qCodeOfEssdfcxempt2ion",
@@ -61,7 +61,7 @@ const user = {
     Proffession: "Proffession",
     Position: "Position",
     Dependant: "Dependant",
-    Passport: "cezxcxzc00006565",
+    Passport: "2007 15321",
     Password: "Password",
     Role: "Pacient",
     Gender: "male",
@@ -69,7 +69,45 @@ const user = {
     Disability: "Dability"
 };
 
-const json = JSON.stringify(user);
+
+const successUser = {
+    idpacient: "5",
+    OMC: "000000000000000",
+    CodeOfExemption: "000000000000001",
+    SNILS: "111111111 111 11",
+    Surname: "surname",
+    MiddleName: "Middvvfbfdme",
+    Name: "Name",
+    DateOfBirth: "DateOfBirth",
+    LiveArea: "LiveArea",
+    LiveRegion: "LiveRegion",
+    LiveSettlement: "LiveSettlement",
+    LiveNeighborhood: "LiveNeighborhood",
+    LiveHouse: "LiveHouse",
+    LiveHousing: "LiveHousing",
+    LiveAppartment: "uvcoLiveAppartment",
+    StayArea: "StayArea",
+    StayRegion: "StayRegion",
+    StaySettlement: "StaySettlement",
+    StayNeighborhood: "StayNeighborhood",
+    StayHouse: "StayHouse",
+    StayHousing: "StayHousing",
+    StayAppartment: "StaayAppartment",
+    HomePhoneNumber: "213564645",
+    PlaceOfWork: "PlaceOfvxWork",
+    Proffession: "Proffession",
+    Position: "Position",
+    Dependant: "-",
+    Passport: "010101112",
+    Password: "Password",
+    Role: "Pacient",
+    Gender: "male",
+    RightToPreferentialService: "54365345754374",
+    Disability: "-"
+};
+
+const json = JSON.stringify(successUser);
+const defJson = JSON.stringify(definedUser);
 
 describe("add user tests", () => {
 
@@ -98,7 +136,7 @@ describe("add user tests", () => {
             .post("/api/users/add")
             .set("Content-Type", "application/json")
             .set("Authorization", tokens.adminToken)
-            .send(json)
+            .send(defJson)
             .then(res => {
                 expect(res.status).toBe(406);
                 expect(res.body).toHaveProperty("message");
@@ -118,4 +156,5 @@ describe("add user tests", () => {
                 done();
             });
     });
+
 });
